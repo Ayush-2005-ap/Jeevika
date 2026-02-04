@@ -46,28 +46,38 @@ const Navbar = () => {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       className={`fixed top-0 w-full z-50 transition-all duration-300
-      ${scrolled ? "bg-white/90 backdrop-blur shadow-sm py-2" : "bg-transparent py-4"}`}
+      ${scrolled ? "bg-white/90 backdrop-blur shadow-sm py-2" : "bg-white/60 py-4"}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <motion.img
-              whileHover={{ scale: 1.05 }}
-              src="/Logo.png"
-              alt="Jeevika Logo"
-              className="h-11 object-contain"
-            />
-            <span className="hidden sm:block text-xs tracking-wide text-gray-500">
-              Law, Liberty & Livelihood
-            </span>
+          <Link to="/" className="flex items-center gap-3 cursor-pointer">
+            <div className="flex flex-col leading-none">
+              <img src="/Logo.png" alt="Jeevika Logo" className="h-10" />
+              <span className="text-xs text-gray-500 mt-0.5">
+                Law, Liberty & Livelihood
+              </span>
+            </div>
           </Link>
 
           {/* Desktop */}
           <div className="hidden lg:flex items-center gap-4">
             {navLinks.map((link) => (
-              <NavItem key={link.name} link={link} active={location.pathname === link.path} />
+              <NavItem
+                key={link.name}
+                link={link}
+                active={location.pathname === link.path}
+              />
             ))}
+
+            <a
+              href="https://play.google.com/store/apps/details?id=com.jeevika&pcampaignid=web_share"
+              target="_blank"
+              rel="noreferrer"
+              className="cursor-pointer bg-[#9A4222] text-amber-300 hover:bg-amber-700 hover:text-black px-3 py-1.5 rounded-full transition text-sm font-medium"
+            >
+              Jeevika App
+            </a>
           </div>
 
           {/* Mobile Button */}
@@ -95,7 +105,11 @@ const Navbar = () => {
             >
               <div className="p-4 space-y-2">
                 {navLinks.map((link) => (
-                  <MobileNavItem key={link.name} link={link} close={() => setIsOpen(false)} />
+                  <MobileNavItem
+                    key={link.name}
+                    link={link}
+                    close={() => setIsOpen(false)}
+                  />
                 ))}
               </div>
             </motion.div>
@@ -113,8 +127,8 @@ const NavItem = ({ link, active }) => {
     <div onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} className="relative">
       <Link
         to={link.path}
-        className={`px-3 py-2 text-sm font-medium transition
-        ${active ? "text-primary-600" : "text-gray-700 hover:text-primary-600"}`}
+        className={`cursor-pointer px-3 py-2 text-sm font-medium transition
+        ${active ? "text-amber-600" : "text-gray-700 hover:text-amber-600"}`}
       >
         {link.name}
       </Link>
@@ -129,7 +143,7 @@ const NavItem = ({ link, active }) => {
             <Link
               key={item.name}
               to={item.path}
-              className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-600"
+              className="cursor-pointer block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-amber-600"
             >
               {item.name}
             </Link>
@@ -148,7 +162,7 @@ const MobileNavItem = ({ link, close }) => {
       <div>
         <button
           onClick={() => setOpen(!open)}
-          className="w-full flex justify-between px-3 py-2 text-gray-700 font-medium"
+          className="w-full flex justify-between px-3 py-2 text-gray-700 font-medium cursor-pointer"
         >
           {link.name}
           <span>{open ? "−" : "+"}</span>
@@ -167,7 +181,7 @@ const MobileNavItem = ({ link, close }) => {
                   key={item.name}
                   to={item.path}
                   onClick={close}
-                  className="block px-3 py-1 text-sm text-gray-600 hover:text-primary-600"
+                  className="cursor-pointer block px-3 py-1 text-sm text-gray-600 hover:text-amber-600"
                 >
                   {item.name}
                 </Link>
@@ -183,7 +197,7 @@ const MobileNavItem = ({ link, close }) => {
     <Link
       to={link.path}
       onClick={close}
-      className="block px-3 py-2 text-gray-700 hover:text-primary-600"
+      className="cursor-pointer block px-3 py-2 text-gray-700 hover:text-amber-600"
     >
       {link.name}
     </Link>

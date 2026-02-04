@@ -22,7 +22,11 @@
     --color-secondary-700: #15803d;
     --color-secondary-800: #166534;
     --color-secondary-900: #14532d;
+
+    
 }
+
+
 
 @theme {
     --color-primary-50: var(--color-primary-50);
@@ -103,3 +107,8 @@
         transform: translateX(0);
     }
 }
+  
+a, button, [role="button"] {
+    cursor: pointer !important;
+  }
+  
