@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { FaFacebookF, FaTwitter, FaYoutube, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -33,10 +34,11 @@ const Footer = () => {
   };
 
   const socialLinks = [
-    { name: "Facebook", url: "#" },
-    { name: "Twitter", url: "#" },
-    { name: "YouTube", url: "#" },
-    { name: "LinkedIn", url: "#" },
+    { name: "Facebook", url: "https://www.facebook.com/ccsindia", icon: <FaFacebookF /> },
+    { name: "Twitter", url: "https://twitter.com/ccsindia", icon: <FaTwitter /> },
+    { name: "YouTube", url: "https://www.youtube.com/c/ccsindiatv", icon: <FaYoutube /> },
+    { name: "LinkedIn", url: "https://www.linkedin.com/company/ccsindia/", icon: <FaLinkedinIn /> },
+    { name: "Instagram", url: "https://www.instagram.com/ccsindia/", icon: <FaInstagram /> },
   ];
 
   return (
@@ -67,10 +69,13 @@ const Footer = () => {
                 <motion.a
                   key={s.name}
                   href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.15, y: -2 }}
-                  className="w-9 h-9 rounded-full border border-gray-700 flex items-center justify-center hover:border-primary-500 hover:text-primary-500"
+                  className="w-9 h-9 rounded-full border border-gray-700 flex items-center justify-center hover:border-primary-500 hover:text-primary-500 text-lg"
+                  aria-label={s.name}
                 >
-                  {s.name[0]}
+                  {s.icon}
                 </motion.a>
               ))}
             </div>
