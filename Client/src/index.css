@@ -26,6 +26,12 @@
     
 }
 
+a,
+button,
+[role="button"],
+.cursor-pointer {
+  cursor: pointer !important;
+}
 
 
 @theme {
@@ -107,8 +113,4 @@
         transform: translateX(0);
     }
 }
-  
-a, button, [role="button"] {
-    cursor: pointer !important;
-  }
   

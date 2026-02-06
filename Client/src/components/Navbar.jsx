@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLang } from "../context/LanguageContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { lang, setLang } = useLang();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -13,10 +15,33 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const t = {
+    EN: {
+      home: "Home",
+      campaign: "Campaign",
+      research: "Research",
+      festival: "Festival",
+      involved: "Get Involved",
+      about: "About Us",
+      contact: "Contact",
+      app: "Jeevika App",
+    },
+    HI: {
+      home: "होम",
+      campaign: "अभियान",
+      research: "अनुसंधान",
+      festival: "उत्सव",
+      involved: "जुड़ें",
+      about: "हमारे बारे में",
+      contact: "संपर्क",
+      app: "जीविका ऐप",
+    },
+  };
+
   const navLinks = [
-    { name: "Home", path: "/" },
+    { key: "home", path: "/" },
     {
-      name: "Campaign",
+      key: "campaign",
       path: "/campaign",
       dropdown: [
         { name: "Livelihood Freedom", path: "/campaign/livelihood" },
@@ -25,9 +50,9 @@ const Navbar = () => {
         { name: "Advocacy", path: "/campaign/advocacy" },
       ],
     },
-    { name: "Research", path: "/research" },
+    { key: "research", path: "/research" },
     {
-      name: "Festival",
+      key: "festival",
       path: "/festival",
       dropdown: [
         { name: "Festival 2024", path: "/festival/2024" },
@@ -36,10 +61,30 @@ const Navbar = () => {
         { name: "Previous Festivals", path: "/festival/previous" },
       ],
     },
-    { name: "Get Involved", path: "/get-involved" },
-    { name: "About Us", path: "/about" },
-    { name: "Contact", path: "/contact" },
+    { key: "involved", path: "/get-involved" },
+    { key: "about", path: "/about" },
+    { key: "contact", path: "/contact" },
   ];
+
+  const openJeevikaApp = () => {
+    const ua = navigator.userAgent.toLowerCase();
+    const isIOS = /iphone|ipad|ipod|macintosh/.test(ua);
+    const isAndroid = /android/.test(ua);
+
+    if (isIOS) {
+      window.open("https://apps.apple.com/in/app/idXXXXXXXX", "_blank");
+    } else if (isAndroid) {
+      window.open(
+        "https://play.google.com/store/apps/details?id=com.jeevika&pcampaignid=web_share",
+        "_blank"
+      );
+    } else {
+      window.open(
+        "https://play.google.com/store/apps/details?id=com.jeevika&pcampaignid=web_share",
+        "_blank"
+      );
+    }
+  };
 
   return (
     <motion.nav
@@ -50,6 +95,7 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex justify-between items-center">
+
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 cursor-pointer">
             <div className="flex flex-col leading-none">
@@ -60,32 +106,40 @@ const Navbar = () => {
             </div>
           </Link>
 
-          {/* Desktop */}
+          {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-4">
             {navLinks.map((link) => (
               <NavItem
-                key={link.name}
+                key={link.key}
                 link={link}
+                label={t[lang][link.key]}
                 active={location.pathname === link.path}
               />
             ))}
 
-            <a
-              href="https://play.google.com/store/apps/details?id=com.jeevika&pcampaignid=web_share"
-              target="_blank"
-              rel="noreferrer"
-              className="cursor-pointer bg-[#9A4222] text-amber-300 hover:bg-amber-700 hover:text-black px-3 py-1.5 rounded-full transition text-sm font-medium"
+            {/* App CTA */}
+            <motion.button
+              onClick={openJeevikaApp}
+              whileHover={{ scale: 1.08 }}
+              className="px-4 py-2 rounded-full bg-gradient-to-r from-primary-500 to-primary-700 text-white text-sm font-semibold cursor-pointer"
             >
-              Jeevika App
-            </a>
+              📱 {t[lang].app}
+            </motion.button>
+
+            {/* Language Toggle */}
+            <button
+              onClick={() => setLang(lang === "EN" ? "HI" : "EN")}
+              className="px-3 py-1.5 rounded-full border text-xs font-semibold cursor-pointer"
+            >
+              {lang}
+            </button>
           </div>
 
-          {/* Mobile Button */}
+          {/* Hamburger */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-md hover:bg-gray-100"
+            className="lg:hidden p-2 rounded-md hover:bg-gray-100 cursor-pointer"
           >
-            <span className="sr-only">Toggle</span>
             <div className="space-y-1">
               <span className={`block h-0.5 w-6 bg-gray-700 transition ${isOpen && "rotate-45 translate-y-1.5"}`} />
               <span className={`block h-0.5 w-6 bg-gray-700 transition ${isOpen && "opacity-0"}`} />
@@ -103,14 +157,36 @@ const Navbar = () => {
               exit={{ height: 0, opacity: 0 }}
               className="lg:hidden mt-4 rounded-xl bg-white shadow-md overflow-hidden"
             >
-              <div className="p-4 space-y-2">
+              <div className="p-4 space-y-3">
+
                 {navLinks.map((link) => (
-                  <MobileNavItem
-                    key={link.name}
-                    link={link}
-                    close={() => setIsOpen(false)}
-                  />
+                  <Link
+                    key={link.key}
+                    to={link.path}
+                    onClick={() => setIsOpen(false)}
+                    className="block text-gray-700 font-medium cursor-pointer"
+                  >
+                    {t[lang][link.key]}
+                  </Link>
                 ))}
+
+                <hr />
+
+                {/* Mobile App CTA */}
+                <button
+                  onClick={openJeevikaApp}
+                  className="w-full text-center py-2 rounded-full bg-gradient-to-r from-primary-500 to-primary-700 text-white font-semibold cursor-pointer"
+                >
+                  📱 {t[lang].app}
+                </button>
+
+                {/* Mobile Language Toggle */}
+                <button
+                  onClick={() => setLang(lang === "EN" ? "HI" : "EN")}
+                  className="w-full py-2 border rounded-full text-sm font-semibold cursor-pointer"
+                >
+                  {lang === "EN" ? "हिंदी" : "English"}
+                </button>
               </div>
             </motion.div>
           )}
@@ -120,17 +196,21 @@ const Navbar = () => {
   );
 };
 
-const NavItem = ({ link, active }) => {
+const NavItem = ({ link, label, active }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} className="relative">
+    <div
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      className="relative"
+    >
       <Link
         to={link.path}
         className={`cursor-pointer px-3 py-2 text-sm font-medium transition
-        ${active ? "text-amber-600" : "text-gray-700 hover:text-amber-600"}`}
+        ${active ? "text-primary-600" : "text-gray-700 hover:text-primary-600"}`}
       >
-        {link.name}
+        {label}
       </Link>
 
       {link.dropdown && open && (
@@ -143,7 +223,7 @@ const NavItem = ({ link, active }) => {
             <Link
               key={item.name}
               to={item.path}
-              className="cursor-pointer block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-amber-600"
+              className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-600 cursor-pointer"
             >
               {item.name}
             </Link>
@@ -151,56 +231,6 @@ const NavItem = ({ link, active }) => {
         </motion.div>
       )}
     </div>
-  );
-};
-
-const MobileNavItem = ({ link, close }) => {
-  const [open, setOpen] = useState(false);
-
-  if (link.dropdown) {
-    return (
-      <div>
-        <button
-          onClick={() => setOpen(!open)}
-          className="w-full flex justify-between px-3 py-2 text-gray-700 font-medium cursor-pointer"
-        >
-          {link.name}
-          <span>{open ? "−" : "+"}</span>
-        </button>
-
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="pl-4 space-y-1"
-            >
-              {link.dropdown.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  onClick={close}
-                  className="cursor-pointer block px-3 py-1 text-sm text-gray-600 hover:text-amber-600"
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    );
-  }
-
-  return (
-    <Link
-      to={link.path}
-      onClick={close}
-      className="cursor-pointer block px-3 py-2 text-gray-700 hover:text-amber-600"
-    >
-      {link.name}
-    </Link>
   );
 };
 

@@ -9,30 +9,34 @@ import Festival from './pages/Festival';
 import GetInvolved from './pages/GetInvolved';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import { LanguageProvider } from './context/LanguageContext';
 
 function App() {
   return (
-    <Router>
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/campaign" element={<Campaign />} />
-            <Route path="/campaign/*" element={<Campaign />} />
-            <Route path="/research" element={<Research />} />
-            <Route path="/research/*" element={<Research />} />
-            <Route path="/festival" element={<Festival />} />
-            <Route path="/festival/*" element={<Festival />} />
-            <Route path="/get-involved" element={<GetInvolved />} />
-            <Route path="/fellowship" element={<GetInvolved />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <LanguageProvider>
+      <Router>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/campaign" element={<Campaign />} />
+              <Route path="/campaign/*" element={<Campaign />} />
+              <Route path="/research" element={<Research />} />
+              <Route path="/research/*" element={<Research />} />
+              <Route path="/festival" element={<Festival />} />
+              <Route path="/festival/*" element={<Festival />} />
+              <Route path="/get-involved" element={<GetInvolved />} />
+              <Route path="/fellowship" element={<GetInvolved />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </LanguageProvider>
+
   );
 }
 
