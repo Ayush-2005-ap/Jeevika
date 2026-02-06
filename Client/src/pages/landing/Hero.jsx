@@ -8,7 +8,7 @@ const Hero = ({ heading, sub }) => {
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover opacity-75"
         src="/hero.mp4"
       />
 
