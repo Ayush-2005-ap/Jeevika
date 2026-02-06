@@ -114,3 +114,15 @@ button,
     }
 }
   
+.video-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      120deg,
+      rgba(154, 66, 34, 0.35),   /* logo brown */
+      rgba(253, 103, 3, 0.25),  /* saffron */
+      rgba(21, 13, 13, 0.45)        /* contrast */
+    );
+    mix-blend-mode: multiply;
+  }
+  

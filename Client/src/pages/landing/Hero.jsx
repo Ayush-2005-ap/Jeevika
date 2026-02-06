@@ -8,14 +8,14 @@ const Hero = ({ heading, sub }) => {
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-75"
+        className="absolute inset-0 w-full h-full object-cover brightness-95 "
         src="/hero.mp4"
       />
 
-      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 video-overlay" />
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-6">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+        <h1 className="text-4xl sm:text-8xl md:text-6xl font-bold mb-6">
           {heading}
         </h1>
 
