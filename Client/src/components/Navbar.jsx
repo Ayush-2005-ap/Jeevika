@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLang } from "../context/LanguageContext";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const { lang, setLang } = useLang();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -15,6 +17,19 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // ✅ Sync i18next safely
+  useEffect(() => {
+    const map = {
+      HI: "hi",
+      EN: "en",
+      BN: "bn",
+      TA: "ta",
+      TE: "te",
+    };
+    i18n.changeLanguage(map[lang] || "hi");
+  }, [lang, i18n]);
+
+  // ✅ Base translations (fallback-safe)
   const t = {
     EN: {
       home: "Home",
@@ -38,53 +53,20 @@ const Navbar = () => {
     },
   };
 
+  // ✅ SAFE getter (THIS FIXES EVERYTHING)
+  const getLabel = (key) => {
+    return t[lang]?.[key] || t.HI[key];
+  };
+
   const navLinks = [
     { key: "home", path: "/" },
-    {
-      key: "campaign",
-      path: "/campaign",
-      dropdown: [
-        { name: "Livelihood Freedom", path: "/campaign/livelihood" },
-        { name: "Rajasthan", path: "/campaign/rajasthan" },
-        { name: "Bihar", path: "/campaign/bihar" },
-        { name: "Advocacy", path: "/campaign/advocacy" },
-      ],
-    },
+    { key: "campaign", path: "/campaign" },
     { key: "research", path: "/research" },
-    {
-      key: "festival",
-      path: "/festival",
-      dropdown: [
-        { name: "Festival 2024", path: "/festival/2024" },
-        { name: "Jeevika Awards", path: "/festival/awards" },
-        { name: "Submission Guidelines", path: "/festival/guidelines" },
-        { name: "Previous Festivals", path: "/festival/previous" },
-      ],
-    },
+    { key: "festival", path: "/festival" },
     { key: "involved", path: "/get-involved" },
     { key: "about", path: "/about" },
     { key: "contact", path: "/contact" },
   ];
-
-  const openJeevikaApp = () => {
-    const ua = navigator.userAgent.toLowerCase();
-    const isIOS = /iphone|ipad|ipod|macintosh/.test(ua);
-    const isAndroid = /android/.test(ua);
-
-    if (isIOS) {
-      window.open("https://apps.apple.com/in/app/idXXXXXXXX", "_blank");
-    } else if (isAndroid) {
-      window.open(
-        "https://play.google.com/store/apps/details?id=com.jeevika&pcampaignid=web_share",
-        "_blank"
-      );
-    } else {
-      window.open(
-        "https://play.google.com/store/apps/details?id=com.jeevika&pcampaignid=web_share",
-        "_blank"
-      );
-    }
-  };
 
   return (
     <motion.nav
@@ -109,128 +91,54 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-4">
             {navLinks.map((link) => (
-              <NavItem
+              <Link
                 key={link.key}
-                link={link}
-                label={t[lang][link.key]}
-                active={location.pathname === link.path}
-              />
+                to={link.path}
+                className={`px-3 py-2 text-sm font-medium transition
+                ${location.pathname === link.path
+                  ? "text-primary-600"
+                  : "text-gray-700 hover:text-primary-600"}`}
+              >
+                {getLabel(link.key)}
+              </Link>
             ))}
 
-            {/* App CTA */}
             <motion.button
-              onClick={openJeevikaApp}
               whileHover={{ scale: 1.08 }}
-              className="px-4 py-2 rounded-full bg-gradient-to-r from-primary-500 to-primary-700 text-white text-sm font-semibold cursor-pointer"
+              className="px-4 py-2 rounded-full bg-gradient-to-r from-primary-500 to-primary-700 text-white text-sm font-semibold"
             >
-              📱 {t[lang].app}
+              📱 {getLabel("app")}
             </motion.button>
 
-            {/* Language Toggle */}
-            <button
-              onClick={() => setLang(lang === "EN" ? "HI" : "EN")}
-              className="px-3 py-1.5 rounded-full border text-xs font-semibold cursor-pointer"
-            >
-              {lang}
-            </button>
+            {/* Language Selector */}
+            <div className="relative group">
+              <button className="px-4 py-1.5 rounded-full border text-sm font-semibold">
+                🌐 {lang}
+              </button>
+              <div className="absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                {["HI", "EN", "BN", "TA", "TE"].map((l) => (
+                  <button
+                    key={l}
+                    onClick={() => setLang(l)}
+                    className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50"
+                  >
+                    {l}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Hamburger */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-md hover:bg-gray-100 cursor-pointer"
+            className="lg:hidden p-2 rounded-md hover:bg-gray-100"
           >
-            <div className="space-y-1">
-              <span className={`block h-0.5 w-6 bg-gray-700 transition ${isOpen && "rotate-45 translate-y-1.5"}`} />
-              <span className={`block h-0.5 w-6 bg-gray-700 transition ${isOpen && "opacity-0"}`} />
-              <span className={`block h-0.5 w-6 bg-gray-700 transition ${isOpen && "-rotate-45 -translate-y-1.5"}`} />
-            </div>
+            ☰
           </button>
         </div>
-
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="lg:hidden mt-4 rounded-xl bg-white shadow-md overflow-hidden"
-            >
-              <div className="p-4 space-y-3">
-
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.key}
-                    to={link.path}
-                    onClick={() => setIsOpen(false)}
-                    className="block text-gray-700 font-medium cursor-pointer"
-                  >
-                    {t[lang][link.key]}
-                  </Link>
-                ))}
-
-                <hr />
-
-                {/* Mobile App CTA */}
-                <button
-                  onClick={openJeevikaApp}
-                  className="w-full text-center py-2 rounded-full bg-gradient-to-r from-primary-500 to-primary-700 text-white font-semibold cursor-pointer"
-                >
-                  📱 {t[lang].app}
-                </button>
-
-                {/* Mobile Language Toggle */}
-                <button
-                  onClick={() => setLang(lang === "EN" ? "HI" : "EN")}
-                  className="w-full py-2 border rounded-full text-sm font-semibold cursor-pointer"
-                >
-                  {lang === "EN" ? "हिंदी" : "English"}
-                </button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
     </motion.nav>
-  );
-};
-
-const NavItem = ({ link, label, active }) => {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <div
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-      className="relative"
-    >
-      <Link
-        to={link.path}
-        className={`cursor-pointer px-3 py-2 text-sm font-medium transition
-        ${active ? "text-primary-600" : "text-gray-700 hover:text-primary-600"}`}
-      >
-        {label}
-      </Link>
-
-      {link.dropdown && open && (
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="absolute left-0 top-full mt-2 w-56 bg-white rounded-xl shadow-lg border py-2"
-        >
-          {link.dropdown.map((item) => (
-            <Link
-              key={item.name}
-              to={item.path}
-              className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-primary-600 cursor-pointer"
-            >
-              {item.name}
-            </Link>
-          ))}
-        </motion.div>
-      )}
-    </div>
   );
 };
 

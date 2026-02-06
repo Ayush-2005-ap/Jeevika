@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const Hero = ({ heading, sub }) => {
   return (
     <section className="relative w-full h-screen overflow-hidden">

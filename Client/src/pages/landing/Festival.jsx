@@ -9,22 +9,25 @@ const Festival = () => {
     {
       title: "Justice by Jeevika | Episode 1",
       src: "/Youtube/Video1.mp4",
-      youtube: "https://www.youtube.com/watch?v=6Qq68xPHvUY&list=PLysF1qZYkiGFu34fjQVi-tcLbIdQDYC-8&index=3&pp=iAQB",
+      poster: "/Youtube/poster1.jpg",
+      youtube: "https://www.youtube.com/watch?v=6Qq68xPHvUY",
     },
     {
       title: "Justice by Jeevika | Episode 2",
       src: "/Youtube/Video4.mp4",
-      youtube: "https://www.youtube.com/watch?v=L9fi6xC__ZU&list=PLysF1qZYkiGFu34fjQVi-tcLbIdQDYC-8&index=8&pp=iAQB",
+      poster: "/Youtube/poster2.jpg",
+      youtube: "https://www.youtube.com/watch?v=L9fi6xC__ZU",
     },
     {
       title: "Justice by Jeevika | Episode 3",
       src: "/Youtube/Video3.mp4",
-      youtube: "https://www.youtube.com/watch?v=cTdLVgESqLg&list=PLysF1qZYkiGFu34fjQVi-tcLbIdQDYC-8&index=10&pp=iAQB0gcJCZEKAYcqIYzv",
+      poster: "/Youtube/poster3.jpg",
+      youtube: "https://www.youtube.com/watch?v=cTdLVgESqLg",
     },
   ];
 
   const playlistUrl =
-    "https://youtube.com/playlist?list=PLysF1qZYkiGFu34fjQVi-tcLbIdQDYC-8&si=vH-yaeYpfB8faCzI";
+    "https://youtube.com/playlist?list=PLysF1qZYkiGFu34fjQVi-tcLbIdQDYC-8";
 
   return (
     <section className="py-24 bg-gradient-to-br from-gray-50 to-primary-50">
@@ -59,22 +62,26 @@ const Festival = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.2 }}
               whileHover={{ y: -6 }}
-              className="group relative block rounded-2xl overflow-hidden shadow-xl cursor-pointer"
+              className="group relative block rounded-2xl overflow-hidden shadow-xl"
             >
-              {/* Video Preview */}
               <video
                 src={video.src}
-                autoPlay
+                poster={video.poster}
                 muted
                 loop
+                autoPlay
                 playsInline
-                className="w-full h-64 object-cover group-hover:scale-105 transition duration-500"
-              />
+                preload="metadata"
+                controls={false}
+                className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+              >
+                Your browser does not support the video tag.
+              </video>
 
-              {/* Dark Overlay */}
+              {/* Overlay */}
               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition" />
 
-              {/* Play Icon */}
+              {/* Play Button */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center text-primary-700 text-2xl shadow-lg group-hover:scale-110 transition">
                   ▶
