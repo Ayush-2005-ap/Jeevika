@@ -114,6 +114,11 @@ button,
     }
 }
   
+html {
+    transition: all 0.2s ease;
+  }
+  
+
 .video-overlay {
     position: absolute;
     inset: 0;

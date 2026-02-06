@@ -10,6 +10,7 @@ import GetInvolved from './pages/GetInvolved';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import { LanguageProvider } from './context/LanguageContext';
+import './i18n';
 
 function App() {
   return (

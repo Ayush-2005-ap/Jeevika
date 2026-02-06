@@ -1,0 +1,72 @@
+{
+    "nav": {
+      "home": "Home",
+      "campaign": "Campaign",
+      "research": "Research",
+      "festival": "Festival",
+      "involved": "Get Involved",
+      "about": "About Us",
+      "contact": "Contact",
+      "app": "Jeevika App"
+    },
+    "campaign": {
+      "livelihood": "Livelihood Freedom",
+      "rajasthan": "Rajasthan",
+      "bihar": "Bihar",
+      "advocacy": "Advocacy"
+    },
+    "festival": {
+      "festival2024": "Festival 2024",
+      "awards": "Jeevika Awards",
+      "guidelines": "Submission Guidelines",
+      "previous": "Previous Festivals"
+    },
+    "home": {
+      "heroTitle": "Law, Liberty & Livelihood",
+      "heroSubtitle": "Empowering communities through legal awareness and livelihood rights",
+      "learnMore": "Learn More",
+      "getStarted": "Get Started",
+      "ourMission": "Our Mission",
+      "ourVision": "Our Vision"
+    },
+    "about": {
+      "title": "About Jeevika",
+      "description": "We work towards empowering marginalized communities",
+      "team": "Our Team",
+      "history": "Our History",
+      "values": "Our Values"
+    },
+    "contact": {
+      "title": "Contact Us",
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Submit",
+      "phone": "Phone",
+      "address": "Address"
+    },
+    "common": {
+      "readMore": "Read More",
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "save": "Save",
+      "edit": "Edit",
+      "delete": "Delete",
+      "loading": "Loading...",
+      "search": "Search",
+      "filter": "Filter",
+      "download": "Download",
+      "share": "Share",
+      "back": "Back",
+      "next": "Next",
+      "previous": "Previous"
+    },
+    "footer": {
+      "followUs": "Follow Us",
+      "quickLinks": "Quick Links",
+      "newsletter": "Subscribe to Newsletter",
+      "copyright": "© 2024 Jeevika. All rights reserved.",
+      "privacy": "Privacy Policy",
+      "terms": "Terms & Conditions"
+    }
+  }
