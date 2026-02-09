@@ -119,6 +119,16 @@ html {
   }
   
 
+  .section-container {
+    @apply max-w-7xl mx-auto px-6 md:px-10 lg:px-16;
+  }
+  
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-xl;
+  }
+  
+
+
 .video-overlay {
     position: absolute;
     inset: 0;
