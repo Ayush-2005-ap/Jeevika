@@ -58,11 +58,11 @@ const Navbar = () => {
 
   const navLinks = [
     { key: "home", path: "/" },
+    { key: "about", path: "/about" },
+    { key: "festival", path: "/festival" },
     { key: "campaign", path: "/campaign" },
     { key: "research", path: "/research" },
-    { key: "festival", path: "/festival" },
     { key: "involved", path: "/get-involved" },
-    { key: "about", path: "/about" },
     { key: "contact", path: "/contact" },
   ];
 

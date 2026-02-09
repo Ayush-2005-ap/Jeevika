@@ -58,12 +58,15 @@ const CTA = () => {
                 Register yourself to receive support, resources, and advocacy
                 for your livelihood.
               </p>
-              <Link
-                to="/get-involved"
+              <a
+                href="https://play.google.com/store/apps/details?id=com.jeevika&pcampaignid=web_share"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-block px-6 py-2 rounded-full bg-white text-primary-700 font-semibold hover:scale-105 transition"
               >
                 Register Now
-              </Link>
+              </a>
+
             </motion.div>
 
             {/* Partner */}
