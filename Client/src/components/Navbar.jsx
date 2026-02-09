@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useLang } from "../context/LanguageContext";
 import { useTranslation } from "react-i18next";
 
@@ -17,7 +17,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ✅ Sync i18next safely
+  // ✅ Sync i18next SAFELY
   useEffect(() => {
     const map = {
       HI: "hi",
@@ -29,18 +29,8 @@ const Navbar = () => {
     i18n.changeLanguage(map[lang] || "hi");
   }, [lang, i18n]);
 
-  // ✅ Base translations (fallback-safe)
-  const t = {
-    EN: {
-      home: "Home",
-      campaign: "Campaign",
-      research: "Research",
-      festival: "Festival",
-      involved: "Get Involved",
-      about: "About Us",
-      contact: "Contact",
-      app: "Jeevika App",
-    },
+  // ✅ ONLY BASE FALLBACK TRANSLATIONS
+  const labels = {
     HI: {
       home: "होम",
       campaign: "अभियान",
@@ -51,12 +41,20 @@ const Navbar = () => {
       contact: "संपर्क",
       app: "जीविका ऐप",
     },
+    EN: {
+      home: "Home",
+      campaign: "Campaign",
+      research: "Research",
+      festival: "Festival",
+      involved: "Get Involved",
+      about: "About Us",
+      contact: "Contact",
+      app: "Jeevika App",
+    },
   };
 
-  // ✅ SAFE getter (THIS FIXES EVERYTHING)
-  const getLabel = (key) => {
-    return t[lang]?.[key] || t.HI[key];
-  };
+  // ✅ SAFE getter — NEVER crashes
+  const getLabel = (key) => labels[lang]?.[key] || labels.HI[key];
 
   const navLinks = [
     { key: "home", path: "/" },
@@ -79,7 +77,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
 
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 cursor-pointer">
+          <Link to="/" className="flex items-center gap-3">
             <div className="flex flex-col leading-none">
               <img src="/Logo.png" alt="Jeevika Logo" className="h-10" />
               <span className="text-xs text-gray-500 mt-0.5">
@@ -88,29 +86,28 @@ const Navbar = () => {
             </div>
           </Link>
 
-          {/* Desktop Menu */}
+          {/* Desktop */}
           <div className="hidden lg:flex items-center gap-4">
             {navLinks.map((link) => (
               <Link
                 key={link.key}
                 to={link.path}
                 className={`px-3 py-2 text-sm font-medium transition
-                ${location.pathname === link.path
-                  ? "text-primary-600"
-                  : "text-gray-700 hover:text-primary-600"}`}
+                ${
+                  location.pathname === link.path
+                    ? "text-primary-600"
+                    : "text-gray-700 hover:text-primary-600"
+                }`}
               >
                 {getLabel(link.key)}
               </Link>
             ))}
 
-            <motion.button
-              whileHover={{ scale: 1.08 }}
-              className="px-4 py-2 rounded-full bg-gradient-to-r from-primary-500 to-primary-700 text-white text-sm font-semibold"
-            >
+            <button className="px-4 py-2 rounded-full bg-gradient-to-r from-primary-500 to-primary-700 text-white text-sm font-semibold">
               📱 {getLabel("app")}
-            </motion.button>
+            </button>
 
-            {/* Language Selector */}
+            {/* Language */}
             <div className="relative group">
               <button className="px-4 py-1.5 rounded-full border text-sm font-semibold">
                 🌐 {lang}
@@ -129,7 +126,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Hamburger */}
+          {/* Mobile */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="lg:hidden p-2 rounded-md hover:bg-gray-100"

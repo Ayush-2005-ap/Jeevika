@@ -21,7 +21,7 @@ const Hero = ({ heading, sub }) => {
         </h1>
 
         <p className="text-base sm:text-lg md:text-xl mb-8 max-w-2xl">
-          {sub}
+        {sub}
         </p>
 
         <a
