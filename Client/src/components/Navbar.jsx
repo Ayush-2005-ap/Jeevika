@@ -9,7 +9,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const { lang, setLang } = useLang();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -17,7 +17,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ✅ Sync i18next SAFELY
   useEffect(() => {
     const map = {
       HI: "hi",
@@ -28,33 +27,6 @@ const Navbar = () => {
     };
     i18n.changeLanguage(map[lang] || "hi");
   }, [lang, i18n]);
-
-  // ✅ ONLY BASE FALLBACK TRANSLATIONS
-  const labels = {
-    HI: {
-      home: "होम",
-      campaign: "अभियान",
-      research: "अनुसंधान",
-      festival: "उत्सव",
-      involved: "जुड़ें",
-      about: "हमारे बारे में",
-      contact: "संपर्क",
-      app: "जीविका ऐप",
-    },
-    EN: {
-      home: "Home",
-      campaign: "Campaign",
-      research: "Research",
-      festival: "Festival",
-      involved: "Get Involved",
-      about: "About Us",
-      contact: "Contact",
-      app: "Jeevika App",
-    },
-  };
-
-  // ✅ SAFE getter — NEVER crashes
-  const getLabel = (key) => labels[lang]?.[key] || labels.HI[key];
 
   const navLinks = [
     { key: "home", path: "/" },
@@ -71,7 +43,7 @@ const Navbar = () => {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       className={`fixed top-0 w-full z-50 transition-all duration-300
-      ${scrolled ? "bg-white/90 backdrop-blur shadow-sm py-2" : "bg-white/60 py-4"}`}
+        ${scrolled ? "bg-white/90 backdrop-blur shadow-sm py-2" : "bg-white/60 py-4"}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex justify-between items-center">
@@ -93,28 +65,34 @@ const Navbar = () => {
                 key={link.key}
                 to={link.path}
                 className={`px-3 py-2 text-sm font-medium transition
-                ${
-                  location.pathname === link.path
+                  ${location.pathname === link.path
                     ? "text-primary-600"
                     : "text-gray-700 hover:text-primary-600"
-                }`}
+                  }`}
               >
-                {getLabel(link.key)}
+                {t(`nav_${link.key}`)}
               </Link>
             ))}
 
-            <button className="px-4 py-2 rounded-full bg-gradient-to-r from-primary-500 to-primary-700 text-white text-sm font-semibold">
-              📱 {getLabel("app")}
+            <button
+              type="button"
+              className="px-4 py-2 rounded-full bg-gradient-to-r from-primary-500 to-primary-700 text-white text-sm font-semibold"
+            >
+              📱 {t("nav_app")}
             </button>
 
             {/* Language */}
             <div className="relative group">
-              <button className="px-4 py-1.5 rounded-full border text-sm font-semibold">
+              <button
+                type="button"
+                className="px-4 py-1.5 rounded-full border text-sm font-semibold"
+              >
                 🌐 {lang}
               </button>
-              <div className="absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+              <div className="absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10">
                 {["HI", "EN", "BN", "TA", "TE"].map((l) => (
                   <button
+                    type="button"
                     key={l}
                     onClick={() => setLang(l)}
                     className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50"
@@ -126,14 +104,66 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Mobile */}
+          {/* Hamburger for Mobile */}
           <button
+            type="button"
+            className="lg:hidden flex items-center px-3 py-2 border rounded text-gray-700 border-gray-400"
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-md hover:bg-gray-100"
+            aria-label="Toggle menu"
           >
-            ☰
+            <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+            </svg>
           </button>
         </div>
+
+        {/* Mobile Menu */}
+        {isOpen && (
+          <div className="lg:hidden bg-white border-t shadow-md">
+            <div className="flex flex-col px-4 py-4 space-y-3">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.key}
+                  to={link.path}
+                  onClick={() => setIsOpen(false)}
+                  className={`px-3 py-2 text-sm font-medium transition
+                    ${location.pathname === link.path
+                      ? "text-primary-600"
+                      : "text-gray-700 hover:text-primary-600"
+                    }`}
+                >
+                  {t(`nav_${link.key}`)}
+                </Link>
+              ))}
+
+              <button
+                type="button"
+                className="px-4 py-2 rounded-full bg-gradient-to-r from-primary-500 to-primary-700 text-white text-sm font-semibold"
+              >
+                📱 {t("nav_app")}
+              </button>
+
+              {/* Language Switcher Mobile */}
+              <div className="flex gap-2 pt-2">
+                {["HI", "EN", "BN", "TA", "TE"].map((l) => (
+                  <button
+                    type="button"
+                    key={l}
+                    onClick={() => {
+                      setLang(l);
+                      setIsOpen(false);
+                    }}
+                    className={`px-3 py-1 rounded-full border text-sm ${
+                      lang === l ? "bg-primary-600 text-white" : "hover:bg-gray-100"
+                    }`}
+                  >
+                    {l}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </motion.nav>
   );

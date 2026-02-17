@@ -10,9 +10,14 @@ import GetInvolved from './pages/GetInvolved';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import { LanguageProvider } from './context/LanguageContext';
-import './i18n';
+import ResearchDetail from './pages/ResearchDetail'
+import { useTranslation } from 'react-i18next';
+
 
 function App() {
+
+    const { t } = useTranslation();
+
   return (
     <LanguageProvider>
       <Router>
@@ -25,6 +30,7 @@ function App() {
               <Route path="/campaign/*" element={<Campaign />} />
               <Route path="/research" element={<Research />} />
               <Route path="/research/*" element={<Research />} />
+              <Route path="/research/:slug" element={<ResearchDetail />} />
               <Route path="/festival" element={<Festival />} />
               <Route path="/festival/*" element={<Festival />} />
               <Route path="/get-involved" element={<GetInvolved />} />

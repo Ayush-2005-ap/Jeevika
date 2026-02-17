@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const Hero = ({ heading, sub }) => {
+const Hero = ({ heading, sub, subtitle }) => {
   return (
     <section className="relative w-full h-screen overflow-hidden">
       <video
@@ -28,7 +28,7 @@ const Hero = ({ heading, sub }) => {
           href="#about"
           className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:scale-105 transition"
         >
-          Learn More
+          {subtitle}
         </a>
       </div>
     </section>

@@ -7,19 +7,19 @@ const Festival = () => {
 
   const videos = [
     {
-      title: "Justice by Jeevika | Episode 1",
+      title: "Justice by Jeevika |Bharat Bhagat",
       src: "/Youtube/Video1.mp4",
       poster: "/Youtube/poster1.jpg",
       youtube: "https://www.youtube.com/watch?v=6Qq68xPHvUY",
     },
     {
-      title: "Justice by Jeevika | Episode 2",
+      title: "Justice by Jeevika | Nitya ",
       src: "/Youtube/Video5.mp4",
       poster: "/Youtube/poster2.jpg",
       youtube: "https://www.youtube.com/watch?v=L9fi6xC__ZU",
     },
     {
-      title: "Justice by Jeevika | Episode 3",
+      title: "Justice by Jeevika | Naim Singh",
       src: "/Youtube/Video3.mp4",
       poster: "/Youtube/poster3.jpg",
       youtube: "https://www.youtube.com/watch?v=cTdLVgESqLg",

@@ -6,26 +6,30 @@ import Festival from './landing/Festival';
 import CTA from './landing/CTA';
 import Newsletter from './landing/Newsletter';
 import { useLang } from "../context/LanguageContext";
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
     const { lang } = useLang();
 
+    const { t } = useTranslation();
+
     const text = {
         en: {
-            heading: "Empowering Livelihoods Across India",
-            sub: "Building sustainable futures for street vendors.",
+            heading: t('greeting'), // Fixed the translation function call
+            sub: t('sub'), // Added the sub translation key
+            subtitle: t('subtitle'), // Added the subtitle translation key
         },
         hi: {
-            heading: "भारत में आजीविका को सशक्त बनाना",
-            sub: "स्ट्रीट वेंडरों के लिए टिकाऊ भविष्य बनाना।",
+            heading: t('greeting'), // Fixed the translation function call
+            sub: t('sub'), 
+            subtitle: t('subtitle'),
         },
     };
-
     const current = text[lang] || text.en;
 
     return (
         <div className="overflow-x-hidden">
-            <Hero heading={current.heading} sub={current.sub} />
+            <Hero heading={current.heading} sub={current.sub} subtitle={current.subtitle} />
             <About />
             <Impact />
             <Festival />
