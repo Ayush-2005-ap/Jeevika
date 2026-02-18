@@ -10,6 +10,13 @@ const Navbar = () => {
   const location = useLocation();
   const { lang, setLang } = useLang();
   const { t, i18n } = useTranslation();
+  const languages = [
+    { code: "HI", label: "हिंदी" },
+    { code: "EN", label: "English" },
+    { code: "BN", label: "বাংলা" },
+    { code: "TA", label: "தமிழ்" },
+    { code: "TE", label: "తెలుగు" },
+  ]
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -90,17 +97,18 @@ const Navbar = () => {
                 🌐 {lang}
               </button>
               <div className="absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10">
-                {["HI", "EN", "BN", "TA", "TE"].map((l) => (
+                {languages.map((l) => (
                   <button
                     type="button"
-                    key={l}
-                    onClick={() => setLang(l)}
+                    key={l.code}
+                    onClick={() => setLang(l.code)}
                     className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50"
                   >
-                    {l}
+                    {l.label}
                   </button>
                 ))}
               </div>
+
             </div>
           </div>
 
@@ -153,9 +161,8 @@ const Navbar = () => {
                       setLang(l);
                       setIsOpen(false);
                     }}
-                    className={`px-3 py-1 rounded-full border text-sm ${
-                      lang === l ? "bg-primary-600 text-white" : "hover:bg-gray-100"
-                    }`}
+                    className={`px-3 py-1 rounded-full border text-sm ${lang === l ? "bg-primary-600 text-white" : "hover:bg-gray-100"
+                      }`}
                   >
                     {l}
                   </button>
