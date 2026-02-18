@@ -1,35 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { FaFacebookF, FaTwitter, FaYoutube, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { t } = useTranslation();
 
   const footerLinks = {
     campaign: [
-      { name: "Livelihood Freedom", path: "/campaign/livelihood" },
-      { name: "Campaign in Rajasthan", path: "/campaign/rajasthan" },
-      { name: "Campaign in Bihar", path: "/campaign/bihar" },
-      { name: "Advocacy", path: "/campaign/advocacy" },
+      { key: "livelihood", path: "/campaign/livelihood" },
+      { key: "rajasthan", path: "/campaign/rajasthan" },
+      { key: "bihar", path: "/campaign/bihar" },
+      { key: "advocacy", path: "/campaign/advocacy" },
     ],
     festival: [
-      { name: "Current Festival", path: "/festival/2024" },
-      { name: "Jeevika Awards", path: "/festival/awards" },
-      { name: "Submission Guidelines", path: "/festival/guidelines" },
-      { name: "Previous Festivals", path: "/festival/previous" },
+      { key: "current", path: "/festival/2024" },
+      { key: "awards", path: "/festival/awards" },
+      { key: "guidelines", path: "/festival/guidelines" },
+      { key: "previous", path: "/festival/previous" },
     ],
     resources: [
-      { name: "Research & Reports", path: "/research" },
-      { name: "Street Vendors Act", path: "/research/street-vendors" },
-      { name: "Policy Documents", path: "/research/policy" },
-      { name: "Case Studies", path: "/research/case-studies" },
+      { key: "research_reports", path: "/research" },
+      { key: "vendors_act", path: "/research/street-vendors" },
+      { key: "policy_docs", path: "/research/policy" },
+      { key: "case_studies", path: "/research/case-studies" },
     ],
     organization: [
-      { name: "About Us", path: "/about" },
-      { name: "Get Involved", path: "/get-involved" },
-      { name: "Jeevika Fellowship", path: "/fellowship" },
-      { name: "Contact Us", path: "/contact" },
+      { key: "about", path: "/about" },
+      { key: "involved", path: "/get-involved" },
+      { key: "fellowship", path: "/fellowship" },
+      { key: "contact", path: "/contact" },
     ],
   };
 
@@ -56,12 +58,13 @@ const Footer = () => {
               </div>
               <div>
                 <h3 className="text-white font-bold">JEEVIKA</h3>
-                <p className="text-xs text-gray-500">Law, Liberty & Livelihood</p>
+                <p className="text-xs text-gray-500">
+                  {t("footer_tagline")}
+                </p>
               </div>
             </Link>
             <p className="text-sm leading-relaxed">
-              Empowering street vendors and informal workers through advocacy,
-              research, and policy change.
+              {t("footer_desc")}
             </p>
 
             <div className="flex gap-4 mt-4">
@@ -84,16 +87,16 @@ const Footer = () => {
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
               <h4 className="text-white font-semibold mb-4 capitalize">
-                {title}
+                {t(`footer_${title}`)}
               </h4>
               <ul className="space-y-2">
                 {links.map((link) => (
-                  <li key={link.name}>
+                  <li key={link.key}>
                     <Link
                       to={link.path}
                       className="hover:text-primary-500 transition"
                     >
-                      {link.name}
+                      {t(`footer_link_${link.key}`)}
                     </Link>
                   </li>
                 ))}
@@ -104,16 +107,18 @@ const Footer = () => {
 
         {/* Bottom */}
         <div className="mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-          <p>© {currentYear} Jeevika Campaign. All rights reserved.</p>
+          <p>
+            © {currentYear} {t("footer_copyright")}
+          </p>
           <div className="flex gap-6">
             <Link to="/privacy-policy" className="hover:text-primary-500">
-              Privacy Policy
+              {t("footer_privacy")}
             </Link>
             <Link to="/terms" className="hover:text-primary-500">
-              Terms of Use
+              {t("footer_terms")}
             </Link>
             <Link to="/sitemap" className="hover:text-primary-500">
-              Sitemap
+              {t("footer_sitemap")}
             </Link>
           </div>
         </div>

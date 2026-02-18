@@ -70,6 +70,47 @@ i18n
             "Collaborate with Jeevika as an organization, institution, or supporter.",
           cta_partner_btn: "Become a Partner",
 
+          newsletter_title: "Support the Change",
+          newsletter_desc:
+            "Stay informed about our work and help us empower street vendors across India. Your support makes a real difference.",
+          newsletter_placeholder: "Enter your email",
+          newsletter_subscribe: "Subscribe",
+          newsletter_success: "✅ Thanks for subscribing!",
+          newsletter_donate: "Donate for Change",
+
+          footer_tagline: "Law, Liberty & Livelihood",
+          footer_desc:
+            "Empowering street vendors and informal workers through advocacy, research, and policy change.",
+
+          footer_campaign: "Campaign",
+          footer_festival: "Festival",
+          footer_resources: "Resources",
+          footer_organization: "Organization",
+
+          footer_link_livelihood: "Livelihood Freedom",
+          footer_link_rajasthan: "Campaign in Rajasthan",
+          footer_link_bihar: "Campaign in Bihar",
+          footer_link_advocacy: "Advocacy",
+
+          footer_link_current: "Current Festival",
+          footer_link_awards: "Jeevika Awards",
+          footer_link_guidelines: "Submission Guidelines",
+          footer_link_previous: "Previous Festivals",
+
+          footer_link_research_reports: "Research & Reports",
+          footer_link_vendors_act: "Street Vendors Act",
+          footer_link_policy_docs: "Policy Documents",
+          footer_link_case_studies: "Case Studies",
+
+          footer_link_about: "About Us",
+          footer_link_involved: "Get Involved",
+          footer_link_fellowship: "Jeevika Fellowship",
+          footer_link_contact: "Contact Us",
+
+          footer_copyright: "Jeevika Campaign. All rights reserved.",
+          footer_privacy: "Privacy Policy",
+          footer_terms: "Terms of Use",
+          footer_sitemap: "Sitemap",
 
         }
       },
@@ -133,6 +174,50 @@ i18n
           cta_partner_btn: "पार्टनर बनें",
 
 
+          newsletter_title: "परिवर्तन का समर्थन करें",
+          newsletter_desc:
+            "हमारे कार्यों के बारे में अपडेट रहें और पूरे भारत में स्ट्रीट वेंडर्स को सशक्त बनाने में हमारी मदद करें। आपका समर्थन वास्तविक बदलाव लाता है।",
+          newsletter_placeholder: "अपना ईमेल दर्ज करें",
+          newsletter_subscribe: "सब्सक्राइब करें",
+          newsletter_success: "✅ सब्सक्राइब करने के लिए धन्यवाद!",
+          newsletter_donate: "परिवर्तन के लिए दान करें",
+
+
+
+          footer_tagline: "कानून, स्वतंत्रता और आजीविका",
+          footer_desc:
+            "स्ट्रीट वेंडर्स और असंगठित कामगारों को वकालत, अनुसंधान और नीति सुधार के माध्यम से सशक्त बनाना।",
+
+          footer_campaign: "अभियान",
+          footer_festival: "उत्सव",
+          footer_resources: "संसाधन",
+          footer_organization: "संगठन",
+
+          footer_link_livelihood: "आजीविका स्वतंत्रता",
+          footer_link_rajasthan: "राजस्थान में अभियान",
+          footer_link_bihar: "बिहार में अभियान",
+          footer_link_advocacy: "वकालत",
+
+          footer_link_current: "वर्तमान उत्सव",
+          footer_link_awards: "जीविका पुरस्कार",
+          footer_link_guidelines: "सबमिशन दिशानिर्देश",
+          footer_link_previous: "पिछले उत्सव",
+
+          footer_link_research_reports: "अनुसंधान और रिपोर्ट",
+          footer_link_vendors_act: "स्ट्रीट वेंडर्स अधिनियम",
+          footer_link_policy_docs: "नीति दस्तावेज़",
+          footer_link_case_studies: "केस स्टडी",
+
+          footer_link_about: "हमारे बारे में",
+          footer_link_involved: "जुड़ें",
+          footer_link_fellowship: "जीविका फेलोशिप",
+          footer_link_contact: "संपर्क करें",
+
+          footer_copyright: "जीविका अभियान. सर्वाधिकार सुरक्षित.",
+          footer_privacy: "गोपनीयता नीति",
+          footer_terms: "उपयोग की शर्तें",
+          footer_sitemap: "साइटमैप",
+
         }
       },
       bn: {
@@ -185,6 +270,50 @@ i18n
           cta_partner_desc:
             "সংস্থা, প্রতিষ্ঠান বা সমর্থক হিসেবে জীবিকার সাথে সহযোগিতা করুন।",
           cta_partner_btn: "পার্টনার হন",
+
+
+          newsletter_title: "পরিবর্তনের সমর্থন করুন",
+          newsletter_desc:
+            "আমাদের কাজ সম্পর্কে আপডেট থাকুন এবং সারা ভারতের স্ট্রিট ভেন্ডরদের ক্ষমতায়নে সাহায্য করুন। আপনার সমর্থন বাস্তব পরিবর্তন আনে।",
+          newsletter_placeholder: "আপনার ইমেইল লিখুন",
+          newsletter_subscribe: "সাবস্ক্রাইব করুন",
+          newsletter_success: "✅ সাবস্ক্রাইব করার জন্য ধন্যবাদ!",
+          newsletter_donate: "পরিবর্তনের জন্য দান করুন",
+
+
+          footer_tagline: "আইন, স্বাধীনতা ও জীবিকা",
+          footer_desc:
+            "তর্ক, গবেষণা ও নীতিগত পরিবর্তনের মাধ্যমে পথ বিক্রেতা ও অসংগঠিত শ্রমিকদের ক্ষমতায়ন।",
+
+          footer_campaign: "প্রচারণা",
+          footer_festival: "উৎসব",
+          footer_resources: "সম্পদ",
+          footer_organization: "সংস্থা",
+
+          footer_link_livelihood: "জীবিকার স্বাধীনতা",
+          footer_link_rajasthan: "রাজস্থানে প্রচারণা",
+          footer_link_bihar: "বিহারে প্রচারণা",
+          footer_link_advocacy: "তর্ক",
+
+          footer_link_current: "বর্তমান উৎসব",
+          footer_link_awards: "জীবিকা পুরস্কার",
+          footer_link_guidelines: "জমা দেওয়ার নির্দেশিকা",
+          footer_link_previous: "পূর্ববর্তী উৎসব",
+
+          footer_link_research_reports: "গবেষণা ও প্রতিবেদন",
+          footer_link_vendors_act: "পথ বিক্রেতা আইন",
+          footer_link_policy_docs: "নীতিগত নথি",
+          footer_link_case_studies: "কেস স্টাডি",
+
+          footer_link_about: "আমাদের সম্পর্কে",
+          footer_link_involved: "যোগ দিন",
+          footer_link_fellowship: "জীবিকা ফেলোশিপ",
+          footer_link_contact: "যোগাযোগ করুন",
+
+          footer_copyright: "জীবিকা প্রচারণা। সর্বস্বত্ব সংরক্ষিত।",
+          footer_privacy: "গোপনীয়তা নীতি",
+          footer_terms: "ব্যবহারের শর্তাবলী",
+          footer_sitemap: "সাইট ম্যাপ",
 
         }
       },
@@ -243,6 +372,48 @@ i18n
             "நிறுவனம், நிறுவனம் அல்லது ஆதரவாளராக ஜீவிகாவுடன் இணைந்து செயல்படுங்கள்.",
           cta_partner_btn: "கூட்டாளராகுங்கள்",
 
+
+          newsletter_title: "மாற்றத்தை ஆதரிக்கவும்",
+          newsletter_desc:
+            "எங்கள் பணிகளைப் பற்றி புதுப்பிப்புகளைப் பெறுங்கள் மற்றும் இந்தியா முழுவதும் தெரு விற்பனையாளர்களை வலுப்படுத்த உதவுங்கள். உங்கள் ஆதரவு உண்மையான மாற்றத்தை உருவாக்குகிறது.",
+          newsletter_placeholder: "உங்கள் மின்னஞ்சலை உள்ளிடவும்",
+          newsletter_subscribe: "சந்தா செலுத்தவும்",
+          newsletter_success: "✅ சந்தா செய்ததற்கு நன்றி!",
+          newsletter_donate: "மாற்றத்திற்காக நன்கொடை வழங்கவும்",
+
+          footer_tagline: "சட்டம், சுதந்திரம் மற்றும் வாழ்வாதாரம்",
+          footer_desc:
+            "தெரு விற்பனையாளர்கள் மற்றும் ஒழுங்கற்ற தொழிலாளர்களை வழக்குரை, ஆராய்ச்சி மற்றும் கொள்கை மாற்றங்கள் மூலம் அதிகாரப்படுத்துதல்.",
+
+          footer_campaign: "பயணம்",
+          footer_festival: "விழா",
+          footer_resources: "வளங்கள்",
+          footer_organization: "அமைப்பு",
+
+          footer_link_livelihood: "வாழ்வாதார சுதந்திரம்",
+          footer_link_rajasthan: "ராஜஸ்தானில் பயணம்",
+          footer_link_bihar: "பீஹாரில் பயணம்",
+          footer_link_advocacy: "வழக்குரை",
+
+          footer_link_current: "தற்போதைய விழா",
+          footer_link_awards: "வாழ்வாதார விருதுகள்",
+          footer_link_guidelines: "சமர்ப்பிப்பு வழிகாட்டிகள்",
+          footer_link_previous: "முந்தைய விழாக்கள்",
+
+          footer_link_research_reports: "ஆராய்ச்சி மற்றும் அறிக்கைகள்",
+          footer_link_vendors_act: "தெரு விற்பனையாளர் சட்டம்",
+          footer_link_policy_docs: "கொள்கை ஆவணங்கள்",
+          footer_link_case_studies: "வழக்கு ஆய்வுகள்",
+
+          footer_link_about: "எங்களை பற்றி",
+          footer_link_involved: "இணைந்துகொள்ளுங்கள்",
+          footer_link_fellowship: "வாழ்வாதார ஃபெல்லோஷிப்",
+          footer_link_contact: "தொடர்பு கொள்ள",
+
+          footer_copyright: "வாழ்வாதார பயணம். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டுள்ளன.",
+          footer_privacy: "தனியுரிமைக் கொள்கை",
+          footer_terms: "பயன்பாட்டு விதிகள்",
+          footer_sitemap: "தள வரைபடம்",
         }
       },
       te: {
@@ -300,6 +471,49 @@ i18n
             "సంస్థ, సంస్థ లేదా మద్దతుదారుగా జీవికాతో సహకరించండి.",
           cta_partner_btn: "భాగస్వామి అవ్వండి",
 
+
+          newsletter_title: "మార్పుకు మద్దతు ఇవ్వండి",
+          newsletter_desc:
+            "మా పనుల గురించి అప్డేట్‌గా ఉండండి మరియు భారతదేశం అంతటా వీధి వ్యాపారులను శక్తివంతం చేయడంలో మాకు సహాయం చేయండి. మీ మద్దతు నిజమైన మార్పును తీసుకువస్తుంది.",
+          newsletter_placeholder: "మీ ఇమెయిల్ నమోదు చేయండి",
+          newsletter_subscribe: "సబ్స్క్రైబ్ చేయండి",
+          newsletter_success: "✅ సబ్స్క్రైబ్ చేసినందుకు ధన్యవాదాలు!",
+          newsletter_donate: "మార్పు కోసం విరాళం ఇవ్వండి",
+
+
+          footer_tagline: "చట్టం, స్వేచ్ఛ మరియు జీవిక",
+          footer_desc:
+            "వీధి విక్రేతలు మరియు అసంఘటిత కార్మికులను వాదన, పరిశోధన మరియు విధాన మార్పుల ద్వారా శక్తివంతం చేయడం.",
+
+          footer_campaign: "ప్రచారం",
+          footer_festival: "పండుగ",
+          footer_resources: "వనరులు",
+          footer_organization: "సంస్థ",
+
+          footer_link_livelihood: "జీవిక స్వేచ్ఛ",
+          footer_link_rajasthan: "రాజస్థాన్‌లో ప్రచారం",
+          footer_link_bihar: "బీహార్‌లో ప్రచారం",
+          footer_link_advocacy: "వాదన",
+
+          footer_link_current: "ప్రస్తుత పండుగ",
+          footer_link_awards: "జీవిక అవార్డులు",
+          footer_link_guidelines: "సమర్పణ మార్గదర్శకాలు",
+          footer_link_previous: "మునుపటి పండుగలు",
+
+          footer_link_research_reports: "పరిశోధన & నివేదికలు",
+          footer_link_vendors_act: "వీధి విక్రేతల చట్టం",
+          footer_link_policy_docs: "విధాన పత్రాలు",
+          footer_link_case_studies: "కేస్ స్టడీస్",
+
+          footer_link_about: "మా గురించి",
+          footer_link_involved: "చేరండి",
+          footer_link_fellowship: "జీవిక ఫెలోషిప్",
+          footer_link_contact: "సంప్రదించండి",
+
+          footer_copyright: "జీవిక ప్రచారం. అన్ని హక్కులు పరిరక్షించబడ్డాయి.",
+          footer_privacy: "గోప్యతా విధానం",
+          footer_terms: "వినియోగ నిబంధనలు",
+          footer_sitemap: "సైట్ మ్యాప్",
         }
       }
     }

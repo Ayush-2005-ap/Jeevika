@@ -1,11 +1,13 @@
 import React, { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Newsletter = () => {
   const [subscribed, setSubscribed] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+  const { t } = useTranslation();
 
   return (
     <section className="py-24 bg-primary-50">
@@ -17,12 +19,11 @@ const Newsletter = () => {
           transition={{ duration: 0.7 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Support the Change
+            {t("newsletter_title")}
           </h2>
 
           <p className="text-gray-600 max-w-2xl mx-auto mb-10">
-            Stay informed about our work and help us empower street vendors
-            across India. Your support makes a real difference.
+            {t("newsletter_desc")}
           </p>
 
           {/* Newsletter */}
@@ -37,14 +38,14 @@ const Newsletter = () => {
               <input
                 type="email"
                 required
-                placeholder="Enter your email"
+                placeholder={t("newsletter_placeholder")}
                 className="px-5 py-3 rounded-full border w-full sm:w-80 focus:ring-2 focus:ring-primary-500 outline-none"
               />
               <button
                 type="submit"
                 className="px-8 py-3 rounded-full bg-primary-600 hover:bg-primary-700 text-white font-semibold transition"
               >
-                Subscribe
+                {t("newsletter_subscribe")}
               </button>
             </form>
           ) : (
@@ -53,20 +54,17 @@ const Newsletter = () => {
               animate={{ opacity: 1 }}
               className="text-green-600 font-semibold mb-10"
             >
-              ✅ Thanks for subscribing!
+              {t("newsletter_success")}
             </motion.p>
           )}
 
           {/* Donate CTA */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="inline-block"
-          >
+          <motion.div whileHover={{ scale: 1.05 }} className="inline-block">
             <Link
               to="/donate"
               className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-primary-600 to-primary-800 text-white font-semibold shadow-lg"
             >
-              ❤️ Donate for Change
+              ❤️ {t("newsletter_donate")}
             </Link>
           </motion.div>
         </motion.div>
