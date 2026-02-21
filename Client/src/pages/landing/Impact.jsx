@@ -3,6 +3,17 @@ import { motion, useInView } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { supabase } from "../../lib/supabase";
 
+const COLORS = {
+  saffron: '#E8760A',
+  saffronLight: '#FFA830',
+  saffronMist: '#FFF5E8',
+  ink: '#1A1208',
+  inkMid: '#3D2C12',
+  cream: '#FAF6F0',
+  stone: '#8C7A60',
+  stoneLight: '#C4B49A',
+};
+
 const Impact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
@@ -79,13 +90,13 @@ const Impact = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section style={{ background: COLORS.cream, paddingTop: '5rem', paddingBottom: '5rem' }}>
       <div className="max-w-6xl mx-auto px-6">
         <motion.h2
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="text-4xl font-bold text-center mb-12"
+          className="text-4xl font-bold text-center mb-12" style={{ color: COLORS.ink }}
         >
           {t("impact_title")}
         </motion.h2>
@@ -97,12 +108,12 @@ const Impact = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: i * 0.2 }}
-              className="text-center p-8 bg-gray-50 rounded-2xl shadow"
+              className="text-center p-8 rounded-2xl shadow" style={{ background: COLORS.saffronMist, color: COLORS.ink }}
             >
-              <h3 className="text-4xl font-bold text-primary-600">
+              <h3 className="text-4xl font-bold" style={{ color: COLORS.saffron }}>
                 {stat.value}
               </h3>
-              <p className="text-gray-600 mt-2">{stat.label}</p>
+              <p className="mt-2" style={{ color: COLORS.stone }}>{stat.label}</p>
             </motion.div>
           ))}
         </div>

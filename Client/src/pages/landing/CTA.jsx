@@ -3,13 +3,24 @@ import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
+const COLORS = {
+  saffron: '#E8760A',
+  saffronLight: '#FFA830',
+  saffronMist: '#FFF5E8',
+  ink: '#1A1208',
+  inkMid: '#3D2C12',
+  cream: '#FAF6F0',
+  stone: '#8C7A60',
+  stoneLight: '#C4B49A',
+};
+
 const CTA = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   const { t } = useTranslation();
 
   return (
-    <section className="py-24 bg-gradient-to-br from-primary-600 to-primary-800 text-white">
+    <section style={{ background: COLORS.stone, color: COLORS.ink, paddingTop: '6rem', paddingBottom: '6rem' }}>
       <div className="max-w-6xl mx-auto px-6 text-center">
         <motion.div
           ref={ref}
@@ -32,7 +43,7 @@ const CTA = () => {
             {/* Lawyer */}
             <motion.div
               whileHover={{ y: -6 }}
-              className="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20"
+              style={{ background: COLORS.saffronLight, borderRadius: '1rem', padding: '2rem', border: `1px solid ${COLORS.saffronLight}` }}
             >
               <i className="fa-solid fa-gavel text-4xl mb-4 text-white"></i>
               <h3 className="text-xl font-semibold mb-3">
@@ -43,7 +54,7 @@ const CTA = () => {
               </p>
               <Link
                 to="/get-involved"
-                className="inline-block px-6 py-2 rounded-full bg-white text-primary-700 font-semibold hover:scale-105 transition"
+                style={{ background: COLORS.saffron, color: '#fff', padding: '0.5rem 1.5rem', borderRadius: '9999px', fontWeight: 600, cursor: 'pointer', transition: 'transform 0.2s', display: 'inline-block' }}
               >
                 {t("cta_lawyer_btn")}
               </Link>
@@ -52,7 +63,7 @@ const CTA = () => {
             {/* Street Vendor */}
             <motion.div
               whileHover={{ y: -6 }}
-              className="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20"
+              style={{ background: COLORS.saffronLight, borderRadius: '1rem', padding: '2rem', border: `1px solid ${COLORS.saffronLight}` }}
             >
               <i className="fa-solid fa-cart-arrow-down text-4xl mb-4 text-white"></i>
               <h3 className="text-xl font-semibold mb-3">
@@ -65,7 +76,7 @@ const CTA = () => {
                 href="https://play.google.com/store/apps/details?id=com.jeevika&pcampaignid=web_share"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block px-6 py-2 rounded-full bg-white text-primary-700 font-semibold hover:scale-105 transition"
+                style={{ background: COLORS.saffron, color: '#fff', padding: '0.5rem 1.5rem', borderRadius: '9999px', fontWeight: 600, cursor: 'pointer', transition: 'transform 0.2s', display: 'inline-block' }}
               >
                 {t("cta_vendor_btn")}
               </a>
@@ -74,7 +85,8 @@ const CTA = () => {
             {/* Partner */}
             <motion.div
               whileHover={{ y: -6 }}
-              className="bg-white/10 backdrop-blur rounded-2xl p-8 border border-white/20"
+              style={{background : COLORS.saffronLight}}
+              className="bg-white/10  backdrop-blur rounded-2xl p-8 border border-white/20"
             >
               <i className="fa-solid fa-handshake text-4xl mb-4 text-white"></i>
               <h3 className="text-xl font-semibold mb-3">
@@ -85,7 +97,7 @@ const CTA = () => {
               </p>
               <Link
                 to="/contact"
-                className="inline-block px-6 py-2 rounded-full bg-white text-primary-700 font-semibold hover:scale-105 transition"
+                style={{ background: COLORS.saffron, color: '#fff', padding: '0.5rem 1.5rem', borderRadius: '9999px', fontWeight: 600, cursor: 'pointer', transition: 'transform 0.2s', display: 'inline-block' }}
               >
                 {t("cta_partner_btn")}
               </Link>

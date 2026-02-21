@@ -3,6 +3,17 @@ import { motion, useInView } from "framer-motion";
 import { supabase } from "../../lib/supabase";
 import { useTranslation } from "react-i18next";
 
+const COLORS = {
+  saffron: '#E8760A',
+  saffronLight: '#FFA830',
+  saffronMist: '#FFF5E8',
+  ink: '#1A1208',
+  inkMid: '#3D2C12',
+  cream: '#FAF6F0',
+  stone: '#8C7A60',
+  stoneLight: '#C4B49A',
+};
+
 const Festival = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });

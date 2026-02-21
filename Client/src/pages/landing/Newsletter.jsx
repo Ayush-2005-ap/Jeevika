@@ -3,6 +3,17 @@ import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
+const COLORS = {
+  saffron: '#E8760A',
+  saffronLight: '#FFA830',
+  saffronMist: '#FFF5E8',
+  ink: '#1A1208',
+  inkMid: '#3D2C12',
+  cream: '#FAF6F0',
+  stone: '#8C7A60',
+  stoneLight: '#C4B49A',
+};
+
 const Newsletter = () => {
   const [subscribed, setSubscribed] = useState(false);
   const ref = useRef(null);
@@ -10,7 +21,7 @@ const Newsletter = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="py-24 bg-primary-50">
+    <section style={{ background: COLORS.cream, paddingTop: '6rem', paddingBottom: '6rem' }}>
       <div className="max-w-5xl mx-auto px-6 text-center">
         <motion.div
           ref={ref}
@@ -18,11 +29,11 @@ const Newsletter = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: COLORS.ink }}>
             {t("newsletter_title")}
           </h2>
 
-          <p className="text-gray-600 max-w-2xl mx-auto mb-10">
+          <p className="max-w-2xl mx-auto mb-10" style={{ color: COLORS.stone }}>
             {t("newsletter_desc")}
           </p>
 
@@ -43,7 +54,7 @@ const Newsletter = () => {
               />
               <button
                 type="submit"
-                className="px-8 py-3 rounded-full bg-primary-600 hover:bg-primary-700 text-white font-semibold transition"
+                className="px-8 py-3 rounded-full" style={{ background: COLORS.saffron, color: '#fff', fontWeight: 600, cursor: 'pointer', transition: 'transform 0.2s' }}
               >
                 {t("newsletter_subscribe")}
               </button>
@@ -62,7 +73,7 @@ const Newsletter = () => {
           <motion.div whileHover={{ scale: 1.05 }} className="inline-block">
             <Link
               to="/donate"
-              className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-primary-600 to-primary-800 text-white font-semibold shadow-lg"
+              className="inline-flex items-center gap-2 px-10 py-4 rounded-full" style={{ background: COLORS.saffron, color: '#fff', fontWeight: 600, cursor: 'pointer', transition: 'transform 0.2s' }}
             >
               ❤️ {t("newsletter_donate")}
             </Link>
