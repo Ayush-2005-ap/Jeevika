@@ -1,15 +1,26 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import { aboutPageEn, aboutPageHi, aboutPageBn, aboutPageTa, aboutPageTe } from './locales/aboutPage';
 
 
 i18n
-  .use(LanguageDetector) // Detects user language
-  .use(initReactI18next) // Passes i18n to react-i18next
+  .use(LanguageDetector)
+  .use(initReactI18next)
   .init({
-    debug: true,
-    lng: "hi",
-    fallbackLng: "hi",
+    debug: import.meta.env.DEV,
+    lng: "en",
+    fallbackLng: "en",
+    interpolation: { escapeValue: false },
+    detection: {
+      order: ["localStorage"],
+      lookupLocalStorage: "lang",
+      caches: [],
+      convertDetectedLanguage: (lng) => {
+        const map = { HI: "hi", EN: "en", BN: "bn", TA: "ta", TE: "te" };
+        return map[String(lng || "").toUpperCase()] || lng?.toLowerCase?.() || "en";
+      },
+    },
     resources: {
       en: {
         translation: {
@@ -112,6 +123,7 @@ i18n
           footer_terms: "Terms of Use",
           footer_sitemap: "Sitemap",
 
+          ...aboutPageEn,
         }
       },
       hi: {
@@ -218,6 +230,7 @@ i18n
           footer_terms: "उपयोग की शर्तें",
           footer_sitemap: "साइटमैप",
 
+          ...aboutPageHi,
         }
       },
       bn: {
@@ -315,6 +328,7 @@ i18n
           footer_terms: "ব্যবহারের শর্তাবলী",
           footer_sitemap: "সাইট ম্যাপ",
 
+          ...aboutPageBn,
         }
       },
       ta: {
@@ -414,6 +428,8 @@ i18n
           footer_privacy: "தனியுரிமைக் கொள்கை",
           footer_terms: "பயன்பாட்டு விதிகள்",
           footer_sitemap: "தள வரைபடம்",
+
+          ...aboutPageTa,
         }
       },
       te: {
@@ -514,6 +530,8 @@ i18n
           footer_privacy: "గోప్యతా విధానం",
           footer_terms: "వినియోగ నిబంధనలు",
           footer_sitemap: "సైట్ మ్యాప్",
+
+          ...aboutPageTe,
         }
       }
     }

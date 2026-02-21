@@ -30,7 +30,8 @@ const Navbar = () => {
 
   useEffect(() => {
     const map = { HI: "hi", EN: "en", BN: "bn", TA: "ta", TE: "te" };
-    i18n.changeLanguage(map[lang] || "hi");
+    const code = map[lang] || map[String(lang || "").toUpperCase()] || "en";
+    i18n.changeLanguage(code);
   }, [lang, i18n]);
 
   const navLinks = [
@@ -62,7 +63,7 @@ const Navbar = () => {
           <Link to="/" className="flex items-center gap-3">
             <div className="flex flex-col leading-none">
               <img src="/Logo.png" alt="Jeevika Logo" className="h-10" />
-              <span className="text-xs text-gray-500 mt-0.5">
+              <span className="text-xs text-gray-500 mt-0.5 font-black">
                 Law, Liberty & Livelihood
               </span>
             </div>
@@ -77,7 +78,7 @@ const Navbar = () => {
                 className={`px-3 py-2 text-sm font-medium transition
                   ${location.pathname === link.path
                     ? "text-primary-600"
-                    : "text-gray-700 hover:text-primary-600"
+                    : "text-gray-700 hover:text-primary-600 font-bold"
                   }`}
               >
                 {t(`nav_${link.key}`)}
