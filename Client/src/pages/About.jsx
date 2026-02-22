@@ -82,7 +82,7 @@ const Counter = ({ target, suffix = '' }) => {
     return () => clearInterval(timer);
   }, [inView, target]);
 
-  const display = target.includes('K') ? `${(count / 1000).toFixed(count >= 1000 ? 0 : 1)}K` : `${count}`;
+  const display = target.includes('K') ? `${count}K` : `${count}`;
 
   return (
     <span ref={ref}>
@@ -146,7 +146,7 @@ export default function About() {
       ═══════════════════════════════════════ */}
       <section style={{ background: '#fff', borderBottom: `1px solid ${COLORS.stoneLight}` }}>
         <div className="max-w-6xl mx-auto px-6 md:px-12 py-12 md:py-16">
-          
+
           <h1 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(2rem, 5vw, 2.75rem)', fontWeight: 800, color: COLORS.ink, marginBottom: 12, lineHeight: 1.2 }}>
             {t('about_page_title')}
           </h1>
@@ -328,7 +328,7 @@ export default function About() {
                     {t(v.descKey)}
                   </p>
                 </motion.div>
-              
+
               </FadeIn>
             ))}
           </div>

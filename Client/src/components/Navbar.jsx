@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLang } from "../context/LanguageContext";
 import { useTranslation } from "react-i18next";
+import { Globe } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,13 +12,13 @@ const Navbar = () => {
   const location = useLocation();
   const { lang, setLang } = useLang();
   const { t, i18n } = useTranslation();
-  
+
   const languages = [
-    { code: "HI", label: "हिंदी", flag: "🇮🇳" },
-    { code: "EN", label: "English", flag: "🇮🇳" },
-    { code: "BN", label: "বাংলা", flag: "🇮🇳" },
-    { code: "TA", label: "தமிழ்", flag: "🇮🇳" },
-    { code: "TE", label: "తెలుగు", flag: "🇮🇳" },
+    { code: "HI", label: "हिंदी", icons: 'globe' },
+    { code: "EN", label: "English", icons: 'globe' },
+    { code: "BN", label: "বাংলা", icons: 'globe' },
+    { code: "TA", label: "தமிழ்", icons: 'globe' },
+    { code: "TE", label: "తెలుగు", icons: 'globe' },
   ];
 
   const activeLang = languages.find((l) => l.code === lang) || languages[1];
@@ -106,12 +107,12 @@ const Navbar = () => {
                   className="absolute inset-0 bg-gradient-to-r from-primary-50 to-primary-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   initial={false}
                 />
-                
-                <span className="relative text-xl">{activeLang.flag}</span>
+
+                <Globe className="relative w-5 h-5 text-gray-600 group-hover:text-primary-600 transition-colors" />
                 <span className="relative text-sm font-semibold text-gray-700 group-hover:text-primary-700 transition-colors">
                   {activeLang.code}
                 </span>
-                
+
                 {/* Chevron icon with rotation animation */}
                 <motion.svg
                   className="relative w-4 h-4 text-gray-500 group-hover:text-primary-600"
@@ -151,7 +152,7 @@ const Navbar = () => {
                               : "text-gray-700 hover:bg-gray-50"
                             }`}
                         >
-                          <span className="text-xl">{l.flag}</span>
+                          <Globe className="w-5 h-5 flex-shrink-0" />
                           <span className="flex-1 text-left">{l.label}</span>
                           {lang === l.code && (
                             <motion.svg
@@ -245,7 +246,7 @@ const Navbar = () => {
                           : "bg-white text-gray-700 border-gray-200 hover:border-primary-400 hover:bg-primary-50"
                         }`}
                     >
-                      <span className="text-lg">{l.flag}</span>
+                      <Globe className="w-4 h-4 flex-shrink-0" />
                       <span className="text-xs">{l.label}</span>
                       {lang === l.code && (
                         <svg className="w-4 h-4 ml-auto" fill="currentColor" viewBox="0 0 20 20">
