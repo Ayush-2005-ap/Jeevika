@@ -1,8 +1,13 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useSpring, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
+import {
+  Users, Building2, Scale, BarChart3,
+  BookOpen, Globe, Handshake, Star, Target, Search,
+  Rocket, Film, Megaphone, GraduationCap, Trophy, Leaf, Shield, Smartphone,
+  Lightbulb, Landmark,
+} from 'lucide-react';
 
 const COLORS = {
   saffron: '#E8760A',
@@ -60,6 +65,282 @@ const Divider = () => (
 );
 
 /* ─────────────────────────────────────────────
+   FLOATING PARTICLE — loops infinitely up the line
+───────────────────────────────────────────── */
+const FloatingParticle = ({ delay = 0, duration = 4, size = 4, left = 18 }) => (
+  <motion.div
+    initial={{ top: '100%', opacity: 0 }}
+    animate={{ top: '-5%', opacity: [0, 0.9, 0.9, 0] }}
+    transition={{ duration, delay, repeat: Infinity, ease: 'linear' }}
+    style={{
+      position: 'absolute', left, width: size, height: size,
+      borderRadius: '50%', background: COLORS.saffron,
+      boxShadow: `0 0 ${size * 2}px ${COLORS.saffron}`,
+      pointerEvents: 'none', zIndex: 5,
+    }}
+  />
+);
+
+/* ─────────────────────────────────────────────
+   TIMELINE ITEM — ∞ orbit ring + breathing card
+───────────────────────────────────────────── */
+const TimelineItem = ({ item, index, total, t }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const isLast = index === total - 1;
+  const fromRight = index % 2 !== 0;
+
+  /* ── one-shot variants ── */
+  const cardVariants = {
+    hidden: { opacity: 0, x: fromRight ? 60 : -60, scale: 0.92, rotateY: fromRight ? 6 : -6 },
+    visible: {
+      opacity: 1, x: 0, scale: 1, rotateY: 0,
+      transition: { duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }
+    },
+  };
+  const dotVariants = {
+    hidden: { scale: 0, opacity: 0 },
+    visible: {
+      scale: 1, opacity: 1,
+      transition: { type: 'spring', stiffness: 350, damping: 18, delay: 0.02 }
+    },
+  };
+  const yearVariants = {
+    hidden: { opacity: 0, y: -14, scale: 0.8 },
+    visible: {
+      opacity: 1, y: 0, scale: 1,
+      transition: { duration: 0.5, delay: 0.08, ease: 'easeOut' }
+    },
+  };
+  const bodyVariants = {
+    hidden: { opacity: 0, y: 14 },
+    visible: {
+      opacity: 1, y: 0,
+      transition: { duration: 0.55, delay: 0.3, ease: 'easeOut' }
+    },
+  };
+
+  return (
+    <div ref={ref} style={{ position: 'relative', display: 'flex', alignItems: 'flex-start', gap: 24, marginBottom: 52 }}>
+
+      {/* ── Dot column ── */}
+      <div style={{ flexShrink: 0, position: 'relative', width: 44, height: 44, marginTop: 4 }}>
+
+        {/* ∞ Orbit ring — spins forever once visible */}
+        {isInView && (
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
+            style={{
+              position: 'absolute', inset: -6, borderRadius: '50%',
+              border: `1.5px dashed ${COLORS.saffron}55`,
+              pointerEvents: 'none',
+            }}
+          />
+        )}
+
+        {/* Pulse ring burst (one-shot) */}
+        <motion.div
+          initial={{ scale: 0.5, opacity: 0.9 }}
+          animate={isInView ? { scale: 2.6, opacity: 0 } : {}}
+          transition={{ duration: 0.9, delay: 0.08, ease: 'easeOut' }}
+          style={{
+            position: 'absolute', inset: 0, borderRadius: '50%',
+            border: `2px solid ${COLORS.saffron}`, pointerEvents: 'none'
+          }}
+        />
+        {/* Second pulse (one-shot) */}
+        <motion.div
+          initial={{ scale: 0.5, opacity: 0.5 }}
+          animate={isInView ? { scale: 3.2, opacity: 0 } : {}}
+          transition={{ duration: 1.2, delay: 0.3, ease: 'easeOut' }}
+          style={{
+            position: 'absolute', inset: 0, borderRadius: '50%',
+            border: `1.5px solid ${COLORS.saffronLight}`, pointerEvents: 'none'
+          }}
+        />
+
+        {/* ∞ subtle glow pulse on the dot itself */}
+        <motion.div
+          variants={dotVariants} initial="hidden" animate={isInView ? 'visible' : 'hidden'}
+          whileHover={{ scale: 1.2, boxShadow: '0 0 0 10px rgba(232,118,10,0.15)' }}
+          style={{
+            position: 'relative', zIndex: 2,
+            width: 44, height: 44, borderRadius: '50%',
+            background: isLast ? COLORS.saffron : '#fff',
+            border: `3px solid ${COLORS.saffron}`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: '0 4px 20px rgba(232,118,10,0.3)',
+          }}
+        >
+          {isInView && (
+            <motion.div
+              animate={{
+                boxShadow: [
+                  '0 0 0 0px rgba(232,118,10,0.3)',
+                  '0 0 0 8px rgba(232,118,10,0)',
+                ]
+              }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeOut' }}
+              style={{ position: 'absolute', inset: 0, borderRadius: '50%', pointerEvents: 'none' }}
+            />
+          )}
+          <item.Icon className="w-4.5 h-4.5" style={{ color: isLast ? '#fff' : COLORS.saffron }} />
+        </motion.div>
+      </div>
+
+      {/* ── Content card — breathes once visible ── */}
+      <motion.div
+        variants={cardVariants} initial="hidden" animate={isInView ? 'visible' : 'hidden'}
+        whileHover={{ y: -6, boxShadow: '0 24px 64px rgba(26,18,8,0.16)' }}
+        style={{
+          flex: 1, perspective: 600,
+          background: isLast ? COLORS.inkMid : '#fff',
+          borderRadius: 16, padding: '24px 28px',
+          borderLeft: `4px solid ${COLORS.saffron}`,
+          boxShadow: '0 2px 16px rgba(26,18,8,0.06)',
+          transition: 'box-shadow 0.3s ease, transform 0.3s ease',
+        }}
+      >
+        {/* Year pill */}
+        <motion.span
+          variants={yearVariants} initial="hidden" animate={isInView ? 'visible' : 'hidden'}
+          style={{
+            display: 'inline-block', fontFamily: 'Georgia, serif',
+            fontWeight: 800, fontSize: 11,
+            color: isLast ? COLORS.saffronLight : COLORS.saffron,
+            textTransform: 'uppercase', letterSpacing: '0.15em',
+            background: isLast ? 'rgba(232,118,10,0.18)' : COLORS.saffronMist,
+            padding: '4px 12px', borderRadius: 99, marginBottom: 10,
+          }}
+        >
+          {item.year}
+        </motion.span>
+
+        <h3 style={{
+          fontFamily: 'Georgia, serif', fontSize: 18, fontWeight: 700,
+          color: isLast ? '#fff' : COLORS.ink, margin: '0 0 8px',
+        }}>
+          {t(item.titleKey)}
+        </h3>
+
+        <motion.p
+          variants={bodyVariants} initial="hidden" animate={isInView ? 'visible' : 'hidden'}
+          style={{ color: isLast ? COLORS.stoneLight : COLORS.stone, lineHeight: 1.75, fontSize: 14, margin: 0 }}
+        >
+          {t(item.bodyKey)}
+        </motion.p>
+
+        {/* ∞ breathing shimmer bar at bottom */}
+        {isInView && (
+          <motion.div
+            animate={{ opacity: [0.15, 0.4, 0.15] }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            style={{
+              marginTop: 16, height: 2, borderRadius: 2,
+              background: `linear-gradient(90deg, transparent, ${COLORS.saffron}, transparent)`,
+            }}
+          />
+        )}
+      </motion.div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────
+   TIMELINE SECTION
+   scroll-driven fill + infinite floating particles
+───────────────────────────────────────────── */
+const TimelineSection = ({ timeline, t }) => {
+  const sectionRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start 0.85', 'end 0.15'],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 70, damping: 24 });
+  const lineHeight = useTransform(smoothProgress, [0, 1], ['0%', '100%']);
+
+  /* pre-compute particle configs so they're stable across renders */
+  const particles = useMemo(() => [
+    { delay: 0, duration: 5, size: 3, left: 17 },
+    { delay: 1.3, duration: 4.5, size: 5, left: 19 },
+    { delay: 2.6, duration: 5.5, size: 3, left: 21 },
+    { delay: 0.7, duration: 6, size: 4, left: 18 },
+    { delay: 3.2, duration: 4, size: 3, left: 20 },
+    { delay: 1.8, duration: 5.2, size: 4, left: 17 },
+  ], []);
+
+  return (
+    <section ref={sectionRef} style={{ background: COLORS.cream, padding: '96px 0', overflow: 'hidden' }}>
+      <div className="max-w-5xl mx-auto px-6 md:px-12">
+        <FadeIn>
+          <Label>{t('about_journey_label')}</Label>
+          <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 800, color: COLORS.ink, marginBottom: 64 }}>
+            {t('about_journey_heading')}
+          </h2>
+        </FadeIn>
+
+        <div style={{ position: 'relative', paddingLeft: 68 }}>
+
+          {/* ── Static faint track ── */}
+          <div style={{
+            position: 'absolute', left: 21, top: 0, bottom: 0,
+            width: 2, background: `${COLORS.stoneLight}44`, borderRadius: 2,
+          }} />
+
+          {/* ── Scroll-driven saffron fill ── */}
+          <motion.div style={{
+            position: 'absolute', left: 21, top: 0,
+            width: 2, borderRadius: 2,
+            height: lineHeight,
+            background: `linear-gradient(to bottom, ${COLORS.saffron}, ${COLORS.saffronLight})`,
+            transformOrigin: 'top',
+          }} />
+
+          {/* ── ∞ Floating particles travelling up the line ── */}
+          {particles.map((p, i) => (
+            <FloatingParticle key={i} {...p} />
+          ))}
+
+          {/* ── Glowing travelling dot ── */}
+          <motion.div style={{
+            position: 'absolute', left: 12, top: lineHeight,
+            width: 20, height: 20, borderRadius: '50%',
+            background: COLORS.saffron,
+            translateY: '-50%', zIndex: 10,
+          }}>
+            {/* ∞ pulsing glow */}
+            <motion.div
+              animate={{
+                boxShadow: [
+                  `0 0 0 0px rgba(232,118,10,0.5), 0 0 12px rgba(232,118,10,0.7)`,
+                  `0 0 0 10px rgba(232,118,10,0), 0 0 24px rgba(232,118,10,0.3)`,
+                ],
+              }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+              style={{
+                position: 'absolute', inset: 0, borderRadius: '50%',
+                background: COLORS.saffron,
+              }}
+            />
+          </motion.div>
+
+          {/* ── Timeline items ── */}
+          {timeline.map((item, i) => (
+            <TimelineItem
+              key={`${item.year}-${item.titleKey}`}
+              item={item} index={i} total={timeline.length} t={t}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ─────────────────────────────────────────────
    STAT COUNTER
 ───────────────────────────────────────────── */
 const Counter = ({ target, suffix = '' }) => {
@@ -99,28 +380,28 @@ export default function About() {
   const { t } = useTranslation();
 
   const impactStats = useMemo(() => [
-    { value: '12K', suffix: '+', labelKey: 'about_stat_users', icon: '👥' },
-    { value: '400', suffix: '+', labelKey: 'about_stat_markets', icon: '🏙️' },
-    { value: '92', suffix: '%', labelKey: 'about_stat_resolution', icon: '⚖️' },
-    { value: '10000', suffix: '+', labelKey: 'about_stat_trained', icon: '📊' },
+    { value: '12K', suffix: '+', labelKey: 'about_stat_users', Icon: Users },
+    { value: '400', suffix: '+', labelKey: 'about_stat_markets', Icon: Building2 },
+    { value: '92', suffix: '%', labelKey: 'about_stat_resolution', Icon: Scale },
+    { value: '10000', suffix: '+', labelKey: 'about_stat_trained', Icon: BarChart3 },
   ], []);
 
   const pillars = useMemo(() => [
-    { icon: '📚', titleKey: 'about_pillar_1_title', bodyKey: 'about_pillar_1_body' },
-    { icon: '👥', titleKey: 'about_pillar_2_title', bodyKey: 'about_pillar_2_body' },
-    { icon: '⚖️', titleKey: 'about_pillar_3_title', bodyKey: 'about_pillar_3_body' },
-    { icon: '🌍', titleKey: 'about_pillar_4_title', bodyKey: 'about_pillar_4_body' },
+    { Icon: BookOpen, titleKey: 'about_pillar_1_title', bodyKey: 'about_pillar_1_body' },
+    { Icon: Users, titleKey: 'about_pillar_2_title', bodyKey: 'about_pillar_2_body' },
+    { Icon: Scale, titleKey: 'about_pillar_3_title', bodyKey: 'about_pillar_3_body' },
+    { Icon: Globe, titleKey: 'about_pillar_4_title', bodyKey: 'about_pillar_4_body' },
   ], []);
 
   const timeline = useMemo(() => [
-    { year: '2004', icon: '🚀', titleKey: 'about_timeline_1_title', bodyKey: 'about_timeline_1_body' },
-    { year: '2004', icon: '🎬', titleKey: 'about_timeline_2_title', bodyKey: 'about_timeline_2_body' },
-    { year: '2009', icon: '📢', titleKey: 'about_timeline_3_title', bodyKey: 'about_timeline_3_body' },
-    { year: '2011', icon: '🎓', titleKey: 'about_timeline_4_title', bodyKey: 'about_timeline_4_body' },
-    { year: '2014', icon: '🏆', titleKey: 'about_timeline_5_title', bodyKey: 'about_timeline_5_body' },
-    { year: '2015', icon: '🎋', titleKey: 'about_timeline_6_title', bodyKey: 'about_timeline_6_body' },
-    { year: '2020', icon: '🛡️', titleKey: 'about_timeline_7_title', bodyKey: 'about_timeline_7_body' },
-    { year: '2023', icon: '📱', titleKey: 'about_timeline_8_title', bodyKey: 'about_timeline_8_body' },
+    { year: '2004', Icon: Rocket, titleKey: 'about_timeline_1_title', bodyKey: 'about_timeline_1_body' },
+    { year: '2004', Icon: Film, titleKey: 'about_timeline_2_title', bodyKey: 'about_timeline_2_body' },
+    { year: '2009', Icon: Megaphone, titleKey: 'about_timeline_3_title', bodyKey: 'about_timeline_3_body' },
+    { year: '2011', Icon: GraduationCap, titleKey: 'about_timeline_4_title', bodyKey: 'about_timeline_4_body' },
+    { year: '2014', Icon: Trophy, titleKey: 'about_timeline_5_title', bodyKey: 'about_timeline_5_body' },
+    { year: '2015', Icon: Leaf, titleKey: 'about_timeline_6_title', bodyKey: 'about_timeline_6_body' },
+    { year: '2020', Icon: Shield, titleKey: 'about_timeline_7_title', bodyKey: 'about_timeline_7_body' },
+    { year: '2023', Icon: Smartphone, titleKey: 'about_timeline_8_title', bodyKey: 'about_timeline_8_body' },
   ], []);
 
   const awards = useMemo(() => [
@@ -130,12 +411,12 @@ export default function About() {
   ], []);
 
   const coreValues = useMemo(() => [
-    { icon: '⚖️', titleKey: 'about_value_1_title', descKey: 'about_value_1_desc' },
-    { icon: '🤝', titleKey: 'about_value_2_title', descKey: 'about_value_2_desc' },
-    { icon: '📊', titleKey: 'about_value_3_title', descKey: 'about_value_3_desc' },
-    { icon: '🌟', titleKey: 'about_value_4_title', descKey: 'about_value_4_desc' },
-    { icon: '🎯', titleKey: 'about_value_5_title', descKey: 'about_value_5_desc' },
-    { icon: '🔍', titleKey: 'about_value_6_title', descKey: 'about_value_6_desc' },
+    { Icon: Scale, titleKey: 'about_value_1_title', descKey: 'about_value_1_desc' },
+    { Icon: Handshake, titleKey: 'about_value_2_title', descKey: 'about_value_2_desc' },
+    { Icon: BarChart3, titleKey: 'about_value_3_title', descKey: 'about_value_3_desc' },
+    { Icon: Star, titleKey: 'about_value_4_title', descKey: 'about_value_4_desc' },
+    { Icon: Target, titleKey: 'about_value_5_title', descKey: 'about_value_5_desc' },
+    { Icon: Search, titleKey: 'about_value_6_title', descKey: 'about_value_6_desc' },
   ], []);
 
   return (
@@ -196,7 +477,9 @@ export default function About() {
                     background: i % 2 === 1 ? COLORS.saffronMist : '#fff',
                   }}
                 >
-                  <div style={{ fontSize: 32, marginBottom: 8 }}>{s.icon}</div>
+                  <div style={{ marginBottom: 8 }}>
+                    <s.Icon className="w-8 h-8" style={{ color: COLORS.saffron }} />
+                  </div>
                   <div style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(2.4rem, 5vw, 3.6rem)', fontWeight: 900, color: COLORS.saffron, lineHeight: 1 }}>
                     <Counter target={s.value} />{s.suffix}
                   </div>
@@ -213,7 +496,9 @@ export default function About() {
             <div
               style={{ background: COLORS.inkMid, borderRadius: 16, padding: '36px 44px', marginTop: 48, display: 'flex', alignItems: 'flex-start', gap: 24, borderLeft: `4px solid ${COLORS.saffron}` }}
             >
-              <div style={{ fontSize: 36, flexShrink: 0 }}>💡</div>
+              <div style={{ flexShrink: 0 }}>
+                <Lightbulb className="w-9 h-9" style={{ color: COLORS.saffron }} />
+              </div>
               <div>
                 <p style={{ color: COLORS.stoneLight, fontWeight: 700, fontSize: 13, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 8 }}>
                   {t('about_case_label')}
@@ -290,7 +575,9 @@ export default function About() {
                   transition={{ duration: 0.3 }}
                   style={{ background: '#fff', borderRadius: 16, padding: '40px 36px', borderLeft: `5px solid ${COLORS.saffron}`, boxShadow: '0 2px 16px rgba(26,18,8,0.05)', height: '100%' }}
                 >
-                  <div style={{ fontSize: 40, marginBottom: 16 }}>{p.icon}</div>
+                  <div style={{ marginBottom: 16 }}>
+                    <p.Icon className="w-10 h-10" style={{ color: COLORS.saffron }} />
+                  </div>
                   <h3 style={{ fontFamily: 'Georgia, serif', fontSize: 22, fontWeight: 700, color: COLORS.ink, marginBottom: 12 }}>{t(p.titleKey)}</h3>
                   <p style={{ color: COLORS.stone, lineHeight: 1.8, fontSize: 15 }}>{t(p.bodyKey)}</p>
                 </motion.div>
@@ -320,7 +607,12 @@ export default function About() {
                   transition={{ duration: 0.25 }}
                   style={{ background: i % 3 === 1 ? COLORS.ink : COLORS.cream, borderRadius: 14, padding: '32px 28px', minHeight: 200 }}
                 >
-                  <div style={{ fontSize: 32, marginBottom: 16 }}>{v.icon}</div>
+                  <div style={{ marginBottom: 16 }}>
+                    <v.Icon
+                      className="w-8 h-8"
+                      style={{ color: i % 3 === 1 ? COLORS.saffron : COLORS.saffron }}
+                    />
+                  </div>
                   <h3 style={{ fontFamily: 'Georgia, serif', fontSize: 19, fontWeight: 700, color: i % 3 === 1 ? COLORS.saffron : COLORS.ink, marginBottom: 10 }}>
                     {t(v.titleKey)}
                   </h3>
@@ -338,43 +630,7 @@ export default function About() {
       {/* ═══════════════════════════════════════
           TIMELINE
       ═══════════════════════════════════════ */}
-      <section style={{ background: COLORS.cream, padding: '96px 0' }}>
-        <div className="max-w-5xl mx-auto px-6 md:px-12">
-          <FadeIn>
-            <Label>{t('about_journey_label')}</Label>
-            <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 800, color: COLORS.ink, marginBottom: 64 }}>
-              {t('about_journey_heading')}
-            </h2>
-          </FadeIn>
-
-          <div style={{ position: 'relative' }}>
-            {/* Vertical line */}
-            <div style={{ position: 'absolute', left: 28, top: 0, bottom: 0, width: 2, background: `linear-gradient(to bottom, ${COLORS.saffron}, ${COLORS.stoneLight})`, borderRadius: 2 }} />
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 36, paddingLeft: 72 }}>
-              {timeline.map((item, i) => (
-                <FadeIn key={`${item.year}-${item.titleKey}`} delay={i * 0.07} direction="right">
-                  <div style={{ position: 'relative' }}>
-                    {/* Dot */}
-                    <div style={{ position: 'absolute', left: -72, top: 6, width: 40, height: 40, borderRadius: '50%', background: i === timeline.length - 1 ? COLORS.saffron : '#fff', border: `3px solid ${COLORS.saffron}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, boxShadow: '0 4px 12px rgba(232,118,10,0.2)' }}>
-                      {item.icon}
-                    </div>
-                    <div>
-                      <span style={{ fontFamily: 'Georgia, serif', fontWeight: 800, fontSize: 13, color: COLORS.saffron, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                        {item.year}
-                      </span>
-                      <h3 style={{ fontFamily: 'Georgia, serif', fontSize: 20, fontWeight: 700, color: COLORS.ink, margin: '4px 0 8px' }}>
-                        {t(item.titleKey)}
-                      </h3>
-                      <p style={{ color: COLORS.stone, lineHeight: 1.75, fontSize: 15 }}>{t(item.bodyKey)}</p>
-                    </div>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <TimelineSection timeline={timeline} t={t} />
 
       {/* ═══════════════════════════════════════
           RECOGNITION
@@ -423,7 +679,9 @@ export default function About() {
       <section style={{ background: COLORS.cream, padding: '96px 0' }}>
         <div className="max-w-4xl mx-auto px-6 md:px-12 text-center">
           <FadeIn>
-            <div style={{ fontSize: 56, marginBottom: 24 }}>🏛️</div>
+            <div style={{ marginBottom: 24, display: 'flex', justifyContent: 'center' }}>
+              <Landmark className="w-14 h-14" style={{ color: COLORS.saffron }} />
+            </div>
             <Label>{t('about_ccs_label')}</Label>
             <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', fontWeight: 800, color: COLORS.ink, marginBottom: 24 }}>
               {t('about_ccs_heading')}

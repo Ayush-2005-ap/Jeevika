@@ -201,11 +201,12 @@ const Navbar = () => {
                                   : "hover:bg-gray-50 text-gray-700"
                                 }`}
                             >
-                              <div className={`mt-0.5 p-1.5 rounded-lg flex-shrink-0
-                                ${active
-                                  ? "bg-primary-100 text-primary-600"
-                                  : "bg-gray-100 text-gray-500 group-hover:bg-primary-100 group-hover:text-primary-600"
-                                } transition-colors`}
+                              <div
+                                className="mt-0.5 p-1.5 rounded-lg flex-shrink-0 transition-colors"
+                                style={{
+                                  background: active ? "rgba(232,118,10,0.12)" : undefined,
+                                  color: active ? "#E8760A" : undefined,
+                                }}
                               >
                                 <Icon className="w-4 h-4" />
                               </div>
@@ -380,7 +381,8 @@ const Navbar = () => {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="overflow-hidden ml-3 mt-1 border-l-2 border-primary-100 pl-3"
+                        className="overflow-hidden ml-3 mt-1 border-l-2 pl-3"
+                        style={{ borderColor: "rgba(232,118,10,0.4)" }}
                       >
                         {repositoryItems.map((item) => {
                           const Icon = item.icon;
@@ -390,13 +392,10 @@ const Navbar = () => {
                               key={item.key}
                               to={item.path}
                               onClick={() => setIsOpen(false)}
-                              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition mb-1
-                                ${active
-                                  ? "text-primary-600 bg-primary-50 font-semibold"
-                                  : "text-gray-600 hover:text-primary-600 hover:bg-gray-50"
-                                }`}
+                              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition mb-1"
+                              style={{ color: active ? "#E8760A" : undefined, background: active ? "rgba(232,118,10,0.06)" : undefined, fontWeight: active ? 600 : undefined }}
                             >
-                              <Icon className="w-4 h-4 flex-shrink-0" />
+                              <Icon className="w-4 h-4 flex-shrink-0" style={{ color: active ? "#E8760A" : undefined }} />
                               <div>
                                 <p className="font-medium leading-tight">{item.label}</p>
                                 <p className="text-xs text-gray-400">{item.desc}</p>

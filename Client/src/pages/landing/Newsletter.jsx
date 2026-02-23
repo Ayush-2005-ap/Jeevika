@@ -124,7 +124,7 @@ const Newsletter = () => {
                   boxShadow: "0 8px 32px rgba(26,18,8,0.25)",
                 }}
               >
-                <Heart className="w-5 h-5" style={{ color: COLORS.saffronLight }} />
+                <Heart className="w-5 h-5" style={{ color: COLORS.saffron }} />
                 {t("newsletter_donate")}
               </Link>
             </motion.div>

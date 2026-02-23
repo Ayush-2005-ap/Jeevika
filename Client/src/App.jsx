@@ -13,6 +13,7 @@ import Donate from './pages/Donate';
 import { LanguageProvider } from './context/LanguageContext';
 import ResearchDetail from './pages/ResearchDetail'
 import { useTranslation } from 'react-i18next';
+import ScrollToTop from './components/ScrollToTop';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
   return (
     <LanguageProvider>
       <Router>
+        <ScrollToTop />
         <div className="flex flex-col min-h-screen">
           <Navbar />
           <main className="flex-grow">

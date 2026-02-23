@@ -114,14 +114,14 @@ const CTA = () => {
 
                 {/* Type badge */}
                 <div className="inline-flex items-center gap-1.5 mb-5 px-3 py-1 rounded-full self-start text-xs font-semibold"
-                  style={{ background: card.bg, color: card.accent }}>
+                  style={{ background: COLORS.saffronMist, color: COLORS.saffron }}>
                   {card.badge}
                 </div>
 
                 {/* Icon */}
                 <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110"
-                  style={{ background: card.bg }}>
-                  <Icon className="w-7 h-7" style={{ color: card.accent }} />
+                  style={{ background: COLORS.saffronMist }}>
+                  <Icon className="w-7 h-7" style={{ color: COLORS.saffron }} />
                 </div>
 
                 <h3 className="text-xl font-bold mb-3" style={{ fontFamily: "Georgia, serif", color: COLORS.ink }}>

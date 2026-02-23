@@ -612,3 +612,5 @@ export const festivalPageTe = {
     fest_submit_step_5_title: "చిత్రాన్ని సమర్పించండి",
     fest_submit_step_5_body: "ఆన్‌లైన్ ఫైల్ బదిలీ లేదా భౌతిక మీడియా ద్వారా మీ చిత్రాన్ని మా కార్యాలయానికి పంపండి.",
 };
+
+

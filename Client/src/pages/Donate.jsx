@@ -213,20 +213,84 @@ const FaqItem = ({ q, a }) => {
 };
 
 /* ─────────────────────────────────────────────
+   RAZORPAY INTEGRATION HELPER
+───────────────────────────────────────────── */
+const loadScript = (src) => {
+    return new Promise((resolve) => {
+        const script = document.createElement('script');
+        script.src = src;
+        script.onload = () => resolve(true);
+        script.onerror = () => resolve(false);
+        document.body.appendChild(script);
+    });
+};
+
+/* ─────────────────────────────────────────────
    MAIN COMPONENT
 ───────────────────────────────────────────── */
 export default function Donate() {
     const [selectedTier, setSelectedTier] = useState(TIERS[1]);
     const [customAmount, setCustomAmount] = useState('');
-    const [paymentMethod, setPaymentMethod] = useState('upi');
-    const [upiId, setUpiId] = useState('');
     const [submitted, setSubmitted] = useState(false);
+    const [isProcessing, setIsProcessing] = useState(false);
 
     const finalAmount = customAmount ? Number(customAmount) : selectedTier.amount;
 
-    const handleDonate = (e) => {
+    const handleDonate = async (e) => {
         e.preventDefault();
-        if (finalAmount > 0) setSubmitted(true);
+        if (finalAmount <= 0) return;
+
+        setIsProcessing(true);
+
+        // Load Razorpay SDK
+        const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
+
+        if (!res) {
+            alert('Razorpay SDK failed to load. Are you online?');
+            setIsProcessing(false);
+            return;
+        }
+
+        // Razorpay Options
+        const options = {
+            key: import.meta.env.VITE_RAZORPAY_KEY_ID, // Use environment variable instead of hardcoding
+            amount: finalAmount * 100, // Razorpay works in subunits (paise)
+            currency: "INR",
+            name: "Jeevika",
+            description: "Support Law, Liberty & Livelihood",
+            image: "https://your-logo-url.com/logo.png", // Optional logo
+            handler: function (response) {
+                // Payment was successful
+                // response.razorpay_payment_id
+                setSubmitted(true);
+                setIsProcessing(false);
+            },
+            prefill: {
+                name: "", // Can capture from user state if added later
+                email: "",
+                contact: ""
+            },
+            notes: {
+                address: "Jeevika Office"
+            },
+            theme: {
+                color: COLORS.saffron
+            },
+            modal: {
+                ondismiss: function () {
+                    setIsProcessing(false);
+                }
+            }
+        };
+
+        const rzp = new window.Razorpay(options);
+
+        rzp.on('payment.failed', function (response) {
+            alert("Payment failed: " + response.error.description);
+            setIsProcessing(false);
+        });
+
+        rzp.open();
     };
 
     return (
@@ -467,76 +531,6 @@ export default function Donate() {
                                     <p style={{ color: COLORS.stone, fontSize: 12, marginTop: 6 }}>Minimum ₹50. Any amount helps.</p>
                                 </div>
 
-                                {/* Payment method */}
-                                <div style={{ marginBottom: 32 }}>
-                                    <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 12 }}>
-                                        Payment Method
-                                    </label>
-                                    <div className="grid grid-cols-2 gap-3">
-                                        {[
-                                            { id: 'upi', label: 'UPI', icon: '📲' },
-                                            { id: 'card', label: 'Card', icon: '💳' },
-                                            { id: 'netbanking', label: 'Net Banking', icon: '🏦' },
-                                            { id: 'paypal', label: 'PayPal / Wire', icon: '🌐' },
-                                        ].map(m => (
-                                            <motion.button
-                                                key={m.id}
-                                                type="button"
-                                                whileTap={{ scale: 0.97 }}
-                                                onClick={() => setPaymentMethod(m.id)}
-                                                style={{
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    gap: 10,
-                                                    padding: '12px 16px',
-                                                    borderRadius: 10,
-                                                    border: `2px solid ${paymentMethod === m.id ? COLORS.saffron : COLORS.stoneLight}`,
-                                                    background: paymentMethod === m.id ? COLORS.saffronMist : '#fff',
-                                                    cursor: 'pointer',
-                                                    fontWeight: 600,
-                                                    fontSize: 14,
-                                                    color: paymentMethod === m.id ? COLORS.saffron : COLORS.stone,
-                                                    transition: 'all 0.2s',
-                                                }}
-                                            >
-                                                <span style={{ fontSize: 20 }}>{m.icon}</span>
-                                                {m.label}
-                                            </motion.button>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* UPI field */}
-                                <AnimatePresence>
-                                    {paymentMethod === 'upi' && (
-                                        <motion.div
-                                            initial={{ opacity: 0, height: 0 }}
-                                            animate={{ opacity: 1, height: 'auto' }}
-                                            exit={{ opacity: 0, height: 0 }}
-                                            style={{ marginBottom: 32, overflow: 'hidden' }}
-                                        >
-                                            <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 8 }}>
-                                                Your UPI ID
-                                            </label>
-                                            <input
-                                                type="text"
-                                                placeholder="yourname@upi"
-                                                value={upiId}
-                                                onChange={e => setUpiId(e.target.value)}
-                                                style={{
-                                                    width: '100%',
-                                                    padding: '14px 16px',
-                                                    border: `2px solid ${COLORS.stoneLight}`,
-                                                    borderRadius: 10,
-                                                    fontSize: 15,
-                                                    color: COLORS.ink,
-                                                    outline: 'none',
-                                                    boxSizing: 'border-box',
-                                                }}
-                                            />
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
 
                                 {/* Recurring option */}
                                 <div style={{ marginBottom: 32, display: 'flex', alignItems: 'flex-start', gap: 12 }}>
@@ -551,17 +545,17 @@ export default function Donate() {
                                     type="submit"
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
-                                    disabled={!finalAmount}
+                                    disabled={!finalAmount || isProcessing}
                                     style={{
                                         width: '100%',
                                         padding: '18px',
-                                        background: finalAmount ? COLORS.saffron : COLORS.stoneLight,
+                                        background: (!finalAmount || isProcessing) ? COLORS.stoneLight : COLORS.saffron,
                                         color: '#fff',
                                         border: 'none',
                                         borderRadius: 12,
                                         fontWeight: 800,
                                         fontSize: 17,
-                                        cursor: finalAmount ? 'pointer' : 'not-allowed',
+                                        cursor: (!finalAmount || isProcessing) ? 'not-allowed' : 'pointer',
                                         letterSpacing: '0.04em',
                                         transition: 'background 0.3s',
                                         display: 'flex',
@@ -570,7 +564,7 @@ export default function Donate() {
                                         gap: 10,
                                     }}
                                 >
-                                    🔒 Donate ₹{finalAmount ? finalAmount.toLocaleString('en-IN') : '—'} Securely
+                                    {isProcessing ? 'Opening Razorpay Secure Checkout...' : `🔒 Donate ₹${finalAmount ? finalAmount.toLocaleString('en-IN') : '—'} Securely`}
                                 </motion.button>
 
                                 <p style={{ textAlign: 'center', color: COLORS.stone, fontSize: 12, marginTop: 16 }}>

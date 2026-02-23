@@ -11,9 +11,9 @@ const COLORS = {
 };
 
 const iconMap = [
-  { icon: Users, accent: "#E8760A", bg: "#FFF5E8" },
-  { icon: Briefcase, accent: "#1A7A4A", bg: "#EDFAF3" },
-  { icon: Globe, accent: "#1A4A7A", bg: "#EDF2FA" },
+  { icon: Users },
+  { icon: Briefcase },
+  { icon: Globe },
 ];
 
 const About = () => {
@@ -89,12 +89,12 @@ const About = () => {
               >
                 {/* Top accent line */}
                 <div className="absolute top-0 left-8 right-8 h-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: `linear-gradient(90deg, ${meta.accent}, transparent)` }} />
+                  style={{ background: `linear-gradient(90deg, ${COLORS.saffron}, transparent)` }} />
 
                 {/* Icon */}
                 <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110"
-                  style={{ background: meta.bg }}>
-                  <Icon className="w-7 h-7" style={{ color: meta.accent }} />
+                  style={{ background: COLORS.saffronMist }}>
+                  <Icon className="w-7 h-7" style={{ color: COLORS.saffron }} />
                 </div>
 
                 <h3 className="text-xl font-bold mb-3 transition-colors"
@@ -108,7 +108,7 @@ const About = () => {
 
                 {/* Subtle arrow appears on hover */}
                 <div className="mt-5 flex items-center gap-1 opacity-0 group-hover:opacity-100 translate-x-[-8px] group-hover:translate-x-0 transition-all duration-300"
-                  style={{ color: meta.accent }}>
+                  style={{ color: COLORS.saffron }}>
                   <span className="text-xs font-semibold">Learn more</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </div>
