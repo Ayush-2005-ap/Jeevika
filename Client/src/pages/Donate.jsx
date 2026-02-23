@@ -231,6 +231,9 @@ const loadScript = (src) => {
 export default function Donate() {
     const [selectedTier, setSelectedTier] = useState(TIERS[1]);
     const [customAmount, setCustomAmount] = useState('');
+    const [donorName, setDonorName] = useState('');
+    const [donorEmail, setDonorEmail] = useState('');
+    const [donorPhone, setDonorPhone] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
 
@@ -266,9 +269,9 @@ export default function Donate() {
                 setIsProcessing(false);
             },
             prefill: {
-                name: "", // Can capture from user state if added later
-                email: "",
-                contact: ""
+                name: donorName,
+                email: donorEmail,
+                contact: donorPhone
             },
             notes: {
                 address: "Jeevika Office"
@@ -469,11 +472,11 @@ export default function Donate() {
                                     Thank You for Your Generosity!
                                 </h3>
                                 <p style={{ color: COLORS.stone, fontSize: 16, lineHeight: 1.8, maxWidth: 420, margin: '0 auto 32px' }}>
-                                    Your donation of <strong style={{ color: COLORS.saffron }}>₹{finalAmount.toLocaleString('en-IN')}</strong> is making a real difference.
-                                    A receipt and 80G certificate will be emailed to you shortly.
+                                    Thank you, <strong style={{ color: COLORS.ink }}>{donorName || 'supporter'}</strong>! Your donation of <strong style={{ color: COLORS.saffron }}>₹{finalAmount.toLocaleString('en-IN')}</strong> is making a real difference.
+                                    A receipt and 80G certificate will be emailed to <strong style={{ color: COLORS.ink }}>{donorEmail}</strong> shortly.
                                 </p>
                                 <button
-                                    onClick={() => { setSubmitted(false); setCustomAmount(''); setSelectedTier(TIERS[1]); }}
+                                    onClick={() => { setSubmitted(false); setCustomAmount(''); setDonorName(''); setDonorEmail(''); setDonorPhone(''); setSelectedTier(TIERS[1]); }}
                                     style={{ background: COLORS.saffron, color: '#fff', border: 'none', borderRadius: 8, padding: '14px 32px', fontWeight: 700, fontSize: 15, cursor: 'pointer' }}
                                 >
                                     Make Another Donation
@@ -529,6 +532,78 @@ export default function Donate() {
                                         />
                                     </div>
                                     <p style={{ color: COLORS.stone, fontSize: 12, marginTop: 6 }}>Minimum ₹50. Any amount helps.</p>
+                                </div>
+
+                                {/* Donor Details */}
+                                <div style={{ marginBottom: 32 }}>
+                                    <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 12 }}>
+                                        Your Details
+                                    </label>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                                        <input
+                                            type="text"
+                                            placeholder="Full Name"
+                                            required
+                                            value={donorName}
+                                            onChange={e => setDonorName(e.target.value)}
+                                            style={{
+                                                width: '100%',
+                                                padding: '14px 16px',
+                                                border: `2px solid ${COLORS.stoneLight}`,
+                                                borderRadius: 10,
+                                                fontSize: 15,
+                                                color: COLORS.ink,
+                                                outline: 'none',
+                                                transition: 'border-color 0.2s',
+                                                boxSizing: 'border-box',
+                                            }}
+                                            onFocus={e => e.target.style.borderColor = COLORS.saffron}
+                                            onBlur={e => e.target.style.borderColor = COLORS.stoneLight}
+                                        />
+                                        <input
+                                            type="email"
+                                            placeholder="Email Address"
+                                            required
+                                            value={donorEmail}
+                                            onChange={e => setDonorEmail(e.target.value)}
+                                            style={{
+                                                width: '100%',
+                                                padding: '14px 16px',
+                                                border: `2px solid ${COLORS.stoneLight}`,
+                                                borderRadius: 10,
+                                                fontSize: 15,
+                                                color: COLORS.ink,
+                                                outline: 'none',
+                                                transition: 'border-color 0.2s',
+                                                boxSizing: 'border-box',
+                                            }}
+                                            onFocus={e => e.target.style.borderColor = COLORS.saffron}
+                                            onBlur={e => e.target.style.borderColor = COLORS.stoneLight}
+                                        />
+                                        <input
+                                            type="tel"
+                                            placeholder="Phone Number"
+                                            required
+                                            value={donorPhone}
+                                            onChange={e => setDonorPhone(e.target.value)}
+                                            style={{
+                                                width: '100%',
+                                                padding: '14px 16px',
+                                                border: `2px solid ${COLORS.stoneLight}`,
+                                                borderRadius: 10,
+                                                fontSize: 15,
+                                                color: COLORS.ink,
+                                                outline: 'none',
+                                                transition: 'border-color 0.2s',
+                                                boxSizing: 'border-box',
+                                            }}
+                                            onFocus={e => e.target.style.borderColor = COLORS.saffron}
+                                            onBlur={e => e.target.style.borderColor = COLORS.stoneLight}
+                                        />
+                                    </div>
+                                    <p style={{ color: COLORS.stone, fontSize: 12, marginTop: 10, lineHeight: 1.5 }}>
+                                        Required for 80G tax exemption receipt and payment tracking.
+                                    </p>
                                 </div>
 
 
