@@ -2,108 +2,168 @@ import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Scale, ShoppingCart, Handshake, ArrowRight } from "lucide-react";
 
 const COLORS = {
-  saffron: '#E8760A',
-  saffronLight: '#FFA830',
-  saffronMist: '#FFF5E8',
-  ink: '#1A1208',
-  inkMid: '#3D2C12',
-  cream: '#FAF6F0',
-  stone: '#8C7A60',
-  stoneLight: '#C4B49A',
+  saffron: '#E8760A', saffronLight: '#FFA830', saffronMist: '#FFF5E8',
+  ink: '#1A1208', inkMid: '#3D2C12', cream: '#FAF6F0',
+  stone: '#8C7A60', stoneLight: '#C4B49A',
 };
+
+const cards = [
+  {
+    Icon: Scale,
+    titleKey: "cta_lawyer_title",
+    descKey: "cta_lawyer_desc",
+    btnKey: "cta_lawyer_btn",
+    type: "link",
+    to: "/get-involved",
+    accent: "#E8760A",
+    bg: "#FFF5E8",
+    badge: "Legal Professional",
+  },
+  {
+    Icon: ShoppingCart,
+    titleKey: "cta_vendor_title",
+    descKey: "cta_vendor_desc",
+    btnKey: "cta_vendor_btn",
+    type: "anchor",
+    href: "https://play.google.com/store/apps/details?id=com.jeevika&pcampaignid=web_share",
+    accent: "#1A7A4A",
+    bg: "#EDFAF3",
+    badge: "Street Vendor",
+    featured: true,
+  },
+  {
+    Icon: Handshake,
+    titleKey: "cta_partner_title",
+    descKey: "cta_partner_desc",
+    btnKey: "cta_partner_btn",
+    type: "link",
+    to: "/contact",
+    accent: "#1A4A7A",
+    bg: "#EDF2FA",
+    badge: "Organisation",
+  },
+];
 
 const CTA = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const { t } = useTranslation();
 
   return (
-    <section style={{ background: COLORS.stone, color: COLORS.ink, paddingTop: '6rem', paddingBottom: '6rem' }}>
-      <div className="max-w-6xl mx-auto px-6 text-center">
+    <section className="py-28 relative overflow-hidden" style={{ background: COLORS.inkMid }}>
+
+      {/* Background decoration */}
+      <div className="absolute inset-0 opacity-[0.035] pointer-events-none"
+        style={{ backgroundImage: "radial-gradient(circle, rgba(232,118,10,0.8) 1px, transparent 1px)", backgroundSize: "36px 36px" }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(ellipse, rgba(232,118,10,0.07), transparent 70%)" }} />
+
+      <div ref={ref} className="max-w-7xl mx-auto px-6 relative">
+
+        {/* Header */}
         <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 32 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-16"
         >
-          {/* Title */}
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          {/* <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full"
+            style={{ background: "rgba(232,118,10,0.15)", border: "1.5px solid rgba(232,118,10,0.35)" }}>
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: COLORS.saffron }} />
+            <span className="text-xs font-bold tracking-widest uppercase" style={{ color: COLORS.saffronLight }}>
+              How You Can Help
+            </span>
+          </div> */}
+
+          <h2 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 800, color: "#fff", lineHeight: 1.2, marginBottom: 16 }}>
             {t("cta_title")}
           </h2>
-
-          {/* Description */}
-          <p className="text-lg text-primary-100 max-w-3xl mx-auto mb-14">
+          <p className="max-w-2xl mx-auto text-lg leading-relaxed" style={{ color: COLORS.stoneLight }}>
             {t("cta_desc")}
           </p>
-
-          {/* Cards */}
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Lawyer */}
-            <motion.div
-              whileHover={{ y: -6 }}
-              style={{ background: COLORS.saffronLight, borderRadius: '1rem', padding: '2rem', border: `1px solid ${COLORS.saffronLight}` }}
-            >
-              <i className="fa-solid fa-gavel text-4xl mb-4 text-white"></i>
-              <h3 className="text-xl font-semibold mb-3">
-                {t("cta_lawyer_title")}
-              </h3>
-              <p className="text-sm text-primary-100 mb-6">
-                {t("cta_lawyer_desc")}
-              </p>
-              <Link
-                to="/get-involved"
-                style={{ background: COLORS.saffron, color: '#fff', padding: '0.5rem 1.5rem', borderRadius: '9999px', fontWeight: 600, cursor: 'pointer', transition: 'transform 0.2s', display: 'inline-block' }}
-              >
-                {t("cta_lawyer_btn")}
-              </Link>
-            </motion.div>
-
-            {/* Street Vendor */}
-            <motion.div
-              whileHover={{ y: -6 }}
-              style={{ background: COLORS.saffronLight, borderRadius: '1rem', padding: '2rem', border: `1px solid ${COLORS.saffronLight}` }}
-            >
-              <i className="fa-solid fa-cart-arrow-down text-4xl mb-4 text-white"></i>
-              <h3 className="text-xl font-semibold mb-3">
-                {t("cta_vendor_title")}
-              </h3>
-              <p className="text-sm text-primary-100 mb-6">
-                {t("cta_vendor_desc")}
-              </p>
-              <a
-                href="https://play.google.com/store/apps/details?id=com.jeevika&pcampaignid=web_share"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ background: COLORS.saffron, color: '#fff', padding: '0.5rem 1.5rem', borderRadius: '9999px', fontWeight: 600, cursor: 'pointer', transition: 'transform 0.2s', display: 'inline-block' }}
-              >
-                {t("cta_vendor_btn")}
-              </a>
-            </motion.div>
-
-            {/* Partner */}
-            <motion.div
-              whileHover={{ y: -6 }}
-              style={{background : COLORS.saffronLight}}
-              className="bg-white/10  backdrop-blur rounded-2xl p-8 border border-white/20"
-            >
-              <i className="fa-solid fa-handshake text-4xl mb-4 text-white"></i>
-              <h3 className="text-xl font-semibold mb-3">
-                {t("cta_partner_title")}
-              </h3>
-              <p className="text-sm text-primary-100 mb-6">
-                {t("cta_partner_desc")}
-              </p>
-              <Link
-                to="/contact"
-                style={{ background: COLORS.saffron, color: '#fff', padding: '0.5rem 1.5rem', borderRadius: '9999px', fontWeight: 600, cursor: 'pointer', transition: 'transform 0.2s', display: 'inline-block' }}
-              >
-                {t("cta_partner_btn")}
-              </Link>
-            </motion.div>
-          </div>
         </motion.div>
+
+        {/* Cards grid */}
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {cards.map((card, i) => {
+            const Icon = card.Icon;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 40 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: i * 0.15, duration: 0.65 }}
+                whileHover={{ y: -8, boxShadow: `0 24px 60px rgba(0,0,0,0.28)` }}
+                className={`relative group rounded-3xl p-8 flex flex-col transition-all duration-300 ${card.featured ? "ring-2 ring-offset-2 ring-offset-transparent" : ""}`}
+                style={{
+                  background: "#fff",
+                  ringColor: card.featured ? card.accent : undefined,
+                  boxShadow: card.featured ? `0 8px 40px rgba(26,122,74,0.25)` : "0 4px 20px rgba(0,0,0,0.12)",
+                }}
+              >
+                {/* Featured badge */}
+                {card.featured && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold whitespace-nowrap"
+                    style={{ background: card.accent, color: "#fff" }}>
+                    ⭐ Most Popular
+                  </div>
+                )}
+
+                {/* Type badge */}
+                <div className="inline-flex items-center gap-1.5 mb-5 px-3 py-1 rounded-full self-start text-xs font-semibold"
+                  style={{ background: card.bg, color: card.accent }}>
+                  {card.badge}
+                </div>
+
+                {/* Icon */}
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110"
+                  style={{ background: card.bg }}>
+                  <Icon className="w-7 h-7" style={{ color: card.accent }} />
+                </div>
+
+                <h3 className="text-xl font-bold mb-3" style={{ fontFamily: "Georgia, serif", color: COLORS.ink }}>
+                  {t(card.titleKey)}
+                </h3>
+                <p className="text-sm leading-relaxed mb-8 flex-1" style={{ color: COLORS.stone }}>
+                  {t(card.descKey)}
+                </p>
+
+                {/* CTA button  */}
+                {card.type === "link" ? (
+                  <Link to={card.to}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm transition-all duration-200 hover:gap-3"
+                    style={{ background: card.accent, color: "#fff" }}>
+                    {t(card.btnKey)} <ArrowRight className="w-4 h-4" />
+                  </Link>
+                ) : (
+                  <a href={card.href} target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm transition-all duration-200 hover:gap-3"
+                    style={{ background: card.accent, color: "#fff" }}>
+                    {t(card.btnKey)} <ArrowRight className="w-4 h-4" />
+                  </a>
+                )}
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Bottom donate nudge */}
+        <motion.div
+          initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.8 }}
+          className="text-center mt-16"
+        >
+          <p className="text-sm mb-4" style={{ color: COLORS.stoneLight }}>Every contribution, big or small, makes a difference.</p>
+          <Link to="/donate"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm transition-all hover:scale-105"
+            style={{ background: "rgba(232,118,10,0.18)", color: COLORS.saffronLight, border: "1.5px solid rgba(232,118,10,0.4)" }}>
+            ❤️ Donate to Jeevika
+          </Link>
+        </motion.div>
+
       </div>
     </section>
   );
