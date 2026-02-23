@@ -2,6 +2,8 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { aboutPageEn, aboutPageHi, aboutPageBn, aboutPageTa, aboutPageTe } from './locales/aboutPage';
+import { getInvolvedPageEn, getInvolvedPageHi, getInvolvedPageBn, getInvolvedPageTa, getInvolvedPageTe } from './locales/getInvolvedPage';
+import { festivalPageEn, festivalPageHi, festivalPageBn, festivalPageTa, festivalPageTe } from './locales/festivalPage';
 
 
 i18n
@@ -124,6 +126,8 @@ i18n
           footer_sitemap: "Sitemap",
 
           ...aboutPageEn,
+          ...getInvolvedPageEn,
+          ...festivalPageEn,
         }
       },
       hi: {
@@ -231,6 +235,8 @@ i18n
           footer_sitemap: "साइटमैप",
 
           ...aboutPageHi,
+          ...getInvolvedPageHi,
+          ...festivalPageHi,
         }
       },
       bn: {
@@ -329,6 +335,8 @@ i18n
           footer_sitemap: "সাইট ম্যাপ",
 
           ...aboutPageBn,
+          ...getInvolvedPageBn,
+          ...festivalPageBn,
         }
       },
       ta: {
@@ -430,6 +438,8 @@ i18n
           footer_sitemap: "தள வரைபடம்",
 
           ...aboutPageTa,
+          ...getInvolvedPageTa,
+          ...festivalPageTa,
         }
       },
       te: {
@@ -532,6 +542,8 @@ i18n
           footer_sitemap: "సైట్ మ్యాప్",
 
           ...aboutPageTe,
+          ...getInvolvedPageTe,
+          ...festivalPageTe,
         }
       }
     }

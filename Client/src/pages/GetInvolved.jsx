@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const COLORS = {
   saffron: '#E8760A', saffronLight: '#FFA830', saffronMist: '#FFF5E8',
@@ -56,6 +57,7 @@ const testimonials = [
 ];
 
 const GetInvolved = () => {
+  const { t } = useTranslation();
   const [selectedRole, setSelectedRole] = useState(null);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', role: '', education: '', availability: '', motivation: '', resume: null });
   const [submitted, setSubmitted] = useState(false);
@@ -71,12 +73,12 @@ const GetInvolved = () => {
       <section style={{ background: '#fff', borderBottom: `1px solid ${COLORS.stoneLight}` }}>
         <div className="max-w-6xl mx-auto px-6 md:px-12 py-12 md:py-16">
           <FadeIn>
-            <Label>Join the Mission</Label>
-            <h1 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(2rem, 5vw, 2.75rem)', fontWeight: 800, color: COLORS.ink, marginBottom: 12, lineHeight: 1.2 }}>Join Our Movement</h1>
-            <p style={{ color: COLORS.stone, fontSize: 17, lineHeight: 1.7, maxWidth: 560, marginTop: 8 }}>Be part of a team that's fighting for the rights and livelihoods of millions of street vendors across India.</p>
+            <Label>{t('gi_label')}</Label>
+            <h1 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(2rem, 5vw, 2.75rem)', fontWeight: 800, color: COLORS.ink, marginBottom: 12, lineHeight: 1.2 }}>{t('gi_h1')}</h1>
+            <p style={{ color: COLORS.stone, fontSize: 17, lineHeight: 1.7, maxWidth: 560, marginTop: 8 }}>{t('gi_tagline')}</p>
             <div className="flex flex-wrap gap-3 mt-6">
-              <a href="#application-form" style={{ background: COLORS.saffron, color: '#fff', fontWeight: 600, padding: '10px 24px', borderRadius: 6, fontSize: 14, textDecoration: 'none' }} className="transition-opacity hover:opacity-90">Apply Now</a>
-              <Link to="/about" style={{ border: `2px solid ${COLORS.ink}`, color: COLORS.ink, fontWeight: 600, padding: '10px 24px', borderRadius: 6, fontSize: 14, textDecoration: 'none' }} className="transition-opacity hover:opacity-90">Learn More</Link>
+              <a href="#application-form" style={{ background: COLORS.saffron, color: '#fff', fontWeight: 600, padding: '10px 24px', borderRadius: 6, fontSize: 14, textDecoration: 'none' }} className="transition-opacity hover:opacity-90">{t('gi_apply_now')}</a>
+              <Link to="/about" style={{ border: `2px solid ${COLORS.ink}`, color: COLORS.ink, fontWeight: 600, padding: '10px 24px', borderRadius: 6, fontSize: 14, textDecoration: 'none' }} className="transition-opacity hover:opacity-90">{t('gi_learn_more')}</Link>
             </div>
           </FadeIn>
         </div>
@@ -86,7 +88,7 @@ const GetInvolved = () => {
       <section style={{ background: COLORS.ink, padding: '64px 0' }}>
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="grid md:grid-cols-3 gap-px rounded-xl overflow-hidden" style={{ background: COLORS.stoneLight }}>
-            {[{ number: '500+', label: 'Active Volunteers' }, { number: '100+', label: 'Interns Trained' }, { number: '50+', label: 'Fellows Graduated' }].map((s, i) => (
+            {[{ number: '500+', label: t('gi_stat_volunteers') }, { number: '100+', label: t('gi_stat_interns') }, { number: '50+', label: t('gi_stat_fellows') }].map((s, i) => (
               <FadeIn key={s.label} delay={i * 0.1}>
                 <div style={{ padding: '40px 28px', background: COLORS.inkMid, textAlign: 'center' }}>
                   <div style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(2.4rem, 5vw, 3.6rem)', fontWeight: 900, color: COLORS.saffron, lineHeight: 1 }}>{s.number}</div>
@@ -102,9 +104,9 @@ const GetInvolved = () => {
       <section style={{ background: COLORS.cream, padding: '96px 0' }}>
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <FadeIn className="text-center mb-16">
-            <Label>Opportunities</Label>
-            <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', fontWeight: 800, color: COLORS.ink, marginBottom: 16 }}>How You Can Contribute</h2>
-            <p style={{ color: COLORS.stone, fontSize: 16, maxWidth: 480, margin: '0 auto' }}>Choose the role that fits your skills, interests, and availability</p>
+            <Label>{t('gi_opp_label')}</Label>
+            <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', fontWeight: 800, color: COLORS.ink, marginBottom: 16 }}>{t('gi_opp_heading')}</h2>
+            <p style={{ color: COLORS.stone, fontSize: 16, maxWidth: 480, margin: '0 auto' }}>{t('gi_opp_sub')}</p>
           </FadeIn>
           <div className="grid md:grid-cols-3 gap-6">
             {opportunities.map((opp, i) => (
@@ -117,13 +119,13 @@ const GetInvolved = () => {
                   <p style={{ color: COLORS.saffron, fontSize: 13, fontWeight: 600, marginBottom: 12 }}>{opp.subtitle}</p>
                   <p style={{ color: COLORS.stone, fontSize: 14, lineHeight: 1.75, marginBottom: 20 }}>{opp.description}</p>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
-                    <div style={{ fontSize: 13, color: COLORS.inkMid }}><span style={{ color: COLORS.saffron }}>⏱ </span><strong>Commitment:</strong> {opp.commitment}</div>
-                    <div style={{ fontSize: 13, color: COLORS.inkMid }}><span style={{ color: COLORS.saffron }}>📅 </span><strong>Duration:</strong> {opp.duration}</div>
+                    <div style={{ fontSize: 13, color: COLORS.inkMid }}><span style={{ color: COLORS.saffron }}>⏱ </span><strong>{t('gi_opp_commitment')}:</strong> {opp.commitment}</div>
+                    <div style={{ fontSize: 13, color: COLORS.inkMid }}><span style={{ color: COLORS.saffron }}>📅 </span><strong>{t('gi_opp_duration')}:</strong> {opp.duration}</div>
                   </div>
                   <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
                     onClick={(e) => { e.stopPropagation(); setSelectedRole(opp.id); setFormData(p => ({ ...p, role: opp.title })); document.getElementById('application-form').scrollIntoView({ behavior: 'smooth' }); }}
                     style={{ width: '100%', padding: '12px', background: COLORS.saffron, color: '#fff', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: 'pointer' }}>
-                    Apply Now
+                    {t('gi_apply_now')}
                   </motion.button>
                 </motion.div>
               </FadeIn>
@@ -142,13 +144,13 @@ const GetInvolved = () => {
                     </div>
                     <div className="grid md:grid-cols-2 gap-8">
                       <div>
-                        <h4 style={{ fontFamily: 'Georgia, serif', fontSize: 18, fontWeight: 700, color: COLORS.ink, marginBottom: 16, paddingBottom: 8, borderBottom: `2px solid ${COLORS.saffronMist}` }}>Key Responsibilities</h4>
+                        <h4 style={{ fontFamily: 'Georgia, serif', fontSize: 18, fontWeight: 700, color: COLORS.ink, marginBottom: 16, paddingBottom: 8, borderBottom: `2px solid ${COLORS.saffronMist}` }}>{t('gi_responsibilities')}</h4>
                         <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
                           {opp.responsibilities.map((r, idx) => (<li key={idx} style={{ display: 'flex', gap: 10, fontSize: 14, color: COLORS.inkMid }}><span style={{ color: COLORS.saffron, fontWeight: 700 }}>✓</span>{r}</li>))}
                         </ul>
                       </div>
                       <div>
-                        <h4 style={{ fontFamily: 'Georgia, serif', fontSize: 18, fontWeight: 700, color: COLORS.ink, marginBottom: 16, paddingBottom: 8, borderBottom: `2px solid ${COLORS.saffronMist}` }}>Requirements</h4>
+                        <h4 style={{ fontFamily: 'Georgia, serif', fontSize: 18, fontWeight: 700, color: COLORS.ink, marginBottom: 16, paddingBottom: 8, borderBottom: `2px solid ${COLORS.saffronMist}` }}>{t('gi_requirements')}</h4>
                         <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
                           {opp.requirements.map((r, idx) => (<li key={idx} style={{ display: 'flex', gap: 10, fontSize: 14, color: COLORS.inkMid }}><span style={{ color: COLORS.saffronLight, fontWeight: 700 }}>→</span>{r}</li>))}
                         </ul>
@@ -166,9 +168,9 @@ const GetInvolved = () => {
       <section style={{ background: '#fff', padding: '96px 0' }}>
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <FadeIn className="text-center mb-16">
-            <Label>Why Join Us</Label>
-            <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', fontWeight: 800, color: COLORS.ink, marginBottom: 16 }}>What You'll Gain</h2>
-            <p style={{ color: COLORS.stone, fontSize: 16, maxWidth: 480, margin: '0 auto' }}>Beyond the satisfaction of making a difference, here's what we offer</p>
+            <Label>{t('gi_benefits_label')}</Label>
+            <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', fontWeight: 800, color: COLORS.ink, marginBottom: 16 }}>{t('gi_benefits_heading')}</h2>
+            <p style={{ color: COLORS.stone, fontSize: 16, maxWidth: 480, margin: '0 auto' }}>{t('gi_benefits_sub')}</p>
           </FadeIn>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {benefits.map((b, i) => (
@@ -188,8 +190,8 @@ const GetInvolved = () => {
       <section style={{ background: COLORS.saffronMist, padding: '96px 0' }}>
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <FadeIn className="text-center mb-16">
-            <Label>Testimonials</Label>
-            <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', fontWeight: 800, color: COLORS.ink }}>Hear From Our Team</h2>
+            <Label>{t('gi_testimonials_label')}</Label>
+            <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', fontWeight: 800, color: COLORS.ink }}>{t('gi_testimonials_heading')}</h2>
           </FadeIn>
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
@@ -217,69 +219,69 @@ const GetInvolved = () => {
       <section id="application-form" style={{ background: COLORS.cream, padding: '96px 0' }}>
         <div className="max-w-3xl mx-auto px-6 md:px-12">
           <FadeIn>
-            <Label>Apply Now</Label>
-            <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', fontWeight: 800, color: COLORS.ink, marginBottom: 8 }}>Join Our Team</h2>
+            <Label>{t('gi_form_label')}</Label>
+            <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', fontWeight: 800, color: COLORS.ink, marginBottom: 8 }}>{t('gi_form_heading')}</h2>
             <Divider />
-            <p style={{ color: COLORS.stone, fontSize: 16, marginBottom: 40 }}>Fill out the form below and we'll get back to you soon</p>
+            <p style={{ color: COLORS.stone, fontSize: 16, marginBottom: 40 }}>{t('gi_form_sub')}</p>
           </FadeIn>
           <FadeIn delay={0.1}>
             <div style={{ background: '#fff', borderRadius: 20, padding: '48px 44px', boxShadow: '0 8px 40px rgba(26,18,8,0.10)' }}>
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
                 <div>
-                  <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 8 }}>Full Name <span style={{ color: COLORS.saffron }}>*</span></label>
-                  <input type="text" name="name" value={formData.name} onChange={handleInputChange} required placeholder="Enter your full name" style={inputStyle} />
+                  <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 8 }}>{t('gi_form_name')} <span style={{ color: COLORS.saffron }}>*</span></label>
+                  <input type="text" name="name" value={formData.name} onChange={handleInputChange} required placeholder={t('gi_form_name')} style={inputStyle} />
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 8 }}>Email Address <span style={{ color: COLORS.saffron }}>*</span></label>
+                    <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 8 }}>{t('gi_form_email')} <span style={{ color: COLORS.saffron }}>*</span></label>
                     <input type="email" name="email" value={formData.email} onChange={handleInputChange} required placeholder="your.email@example.com" style={inputStyle} />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 8 }}>Phone Number <span style={{ color: COLORS.saffron }}>*</span></label>
+                    <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 8 }}>{t('gi_form_phone')} <span style={{ color: COLORS.saffron }}>*</span></label>
                     <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} required placeholder="+91 XXXXX XXXXX" style={inputStyle} />
                   </div>
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 8 }}>I'm interested in <span style={{ color: COLORS.saffron }}>*</span></label>
+                  <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 8 }}>{t('gi_form_role')} <span style={{ color: COLORS.saffron }}>*</span></label>
                   <select name="role" value={formData.role} onChange={handleInputChange} required style={inputStyle}>
-                    <option value="">Select a role</option>
-                    <option value="Volunteer">Volunteer</option>
-                    <option value="Intern">Intern</option>
-                    <option value="Jeevika Fellowship">Jeevika Fellowship (Law Students)</option>
+                    <option value="">{t('gi_form_role_placeholder')}</option>
+                    <option value="Volunteer">{t('gi_role_volunteer')}</option>
+                    <option value="Intern">{t('gi_role_intern')}</option>
+                    <option value="Jeevika Fellowship">{t('gi_role_fellow')}</option>
                   </select>
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 8 }}>Current Education / Occupation <span style={{ color: COLORS.saffron }}>*</span></label>
-                    <input type="text" name="education" value={formData.education} onChange={handleInputChange} required placeholder="e.g., 3rd Year Law Student" style={inputStyle} />
+                    <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 8 }}>{t('gi_form_education')} <span style={{ color: COLORS.saffron }}>*</span></label>
+                    <input type="text" name="education" value={formData.education} onChange={handleInputChange} required placeholder={t('gi_form_education')} style={inputStyle} />
                   </div>
                   <div>
-                    <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 8 }}>Availability <span style={{ color: COLORS.saffron }}>*</span></label>
+                    <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 8 }}>{t('gi_form_availability')} <span style={{ color: COLORS.saffron }}>*</span></label>
                     <select name="availability" value={formData.availability} onChange={handleInputChange} required style={inputStyle}>
-                      <option value="">Select availability</option>
-                      <option value="Immediate">Immediate</option>
-                      <option value="Within 2 weeks">Within 2 weeks</option>
-                      <option value="Within 1 month">Within 1 month</option>
-                      <option value="After 1 month">After 1 month</option>
+                      <option value="">{t('gi_form_availability_placeholder')}</option>
+                      <option value="Immediate">{t('gi_avail_immediate')}</option>
+                      <option value="Within 2 weeks">{t('gi_avail_2weeks')}</option>
+                      <option value="Within 1 month">{t('gi_avail_1month')}</option>
+                      <option value="After 1 month">{t('gi_avail_after')}</option>
                     </select>
                   </div>
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 8 }}>Why do you want to join Jeevika? <span style={{ color: COLORS.saffron }}>*</span></label>
-                  <textarea name="motivation" value={formData.motivation} onChange={handleInputChange} required rows={5} placeholder="Tell us about your motivation, relevant experience, and what you hope to learn..." style={{ ...inputStyle, resize: 'none' }} />
+                  <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 8 }}>{t('gi_form_motivation')} <span style={{ color: COLORS.saffron }}>*</span></label>
+                  <textarea name="motivation" value={formData.motivation} onChange={handleInputChange} required rows={5} placeholder={t('gi_form_motivation_placeholder')} style={{ ...inputStyle, resize: 'none' }} />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 8 }}>Upload Resume / CV (PDF, DOC, DOCX)</label>
+                  <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 8 }}>{t('gi_form_resume')}</label>
                   <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', minHeight: 100, border: `2px dashed ${COLORS.stoneLight}`, borderRadius: 10, cursor: 'pointer', background: COLORS.saffronMist }}>
                     <span style={{ fontSize: 28, marginBottom: 6 }}>📎</span>
-                    <span style={{ color: COLORS.stone, fontSize: 13 }}><strong style={{ color: COLORS.saffron }}>Click to upload</strong> or drag and drop</span>
-                    <span style={{ color: COLORS.stoneLight, fontSize: 12, marginTop: 4 }}>PDF, DOC, DOCX (MAX. 5MB)</span>
+                    <span style={{ color: COLORS.stone, fontSize: 13 }}><strong style={{ color: COLORS.saffron }}>{t('gi_form_upload_cta')}</strong> {t('gi_form_upload_hint')}</span>
+                    <span style={{ color: COLORS.stoneLight, fontSize: 12, marginTop: 4 }}>{t('gi_form_upload_size')}</span>
                     <input type="file" onChange={handleFileChange} accept=".pdf,.doc,.docx" style={{ display: 'none' }} />
                   </label>
                   {formData.resume && <p style={{ marginTop: 8, fontSize: 13, color: '#16A34A' }}>✓ {formData.resume.name}</p>}
                 </div>
                 <motion.button type="submit" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} style={{ width: '100%', padding: '18px', background: COLORS.saffron, color: '#fff', border: 'none', borderRadius: 12, fontWeight: 800, fontSize: 16, cursor: 'pointer' }}>
-                  Submit Application
+                  {t('gi_form_submit')}
                 </motion.button>
               </form>
               <AnimatePresence>
@@ -287,8 +289,8 @@ const GetInvolved = () => {
                   <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} style={{ marginTop: 20, background: COLORS.saffronMist, border: `2px solid ${COLORS.saffron}`, borderRadius: 10, padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 12 }}>
                     <span style={{ fontSize: 24 }}>🙏</span>
                     <div>
-                      <p style={{ fontWeight: 700, color: COLORS.ink, fontSize: 15 }}>Application Submitted Successfully!</p>
-                      <p style={{ color: COLORS.stone, fontSize: 13 }}>We'll review your application and get back to you within 5-7 business days.</p>
+                      <p style={{ fontWeight: 700, color: COLORS.ink, fontSize: 15 }}>{t('gi_form_success_title')}</p>
+                      <p style={{ color: COLORS.stone, fontSize: 13 }}>{t('gi_form_success_body')}</p>
                     </div>
                   </motion.div>
                 )}
@@ -297,7 +299,7 @@ const GetInvolved = () => {
           </FadeIn>
           <FadeIn delay={0.3}>
             <p style={{ textAlign: 'center', color: COLORS.stone, fontSize: 14, marginTop: 24 }}>
-              Have questions? Email us at <a href="mailto:jeevika@ccs.in" style={{ color: COLORS.saffron, fontWeight: 600, textDecoration: 'none' }}>jeevika@ccs.in</a>
+              {t('gi_form_contact')} <a href="mailto:jeevika@ccs.in" style={{ color: COLORS.saffron, fontWeight: 600, textDecoration: 'none' }}>jeevika@ccs.in</a>
             </p>
           </FadeIn>
         </div>
@@ -308,13 +310,13 @@ const GetInvolved = () => {
         <div className="max-w-6xl mx-auto px-6 md:px-12">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
             <FadeIn direction="right">
-              <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 800, color: '#fff', lineHeight: 1.2 }}>Ready to Make a Difference?</h2>
-              <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: 16, marginTop: 12, maxWidth: 480 }}>Join us in our mission to empower street vendors and create lasting social change.</p>
+              <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 800, color: '#fff', lineHeight: 1.2 }}>{t('gi_cta_heading')}</h2>
+              <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: 16, marginTop: 12, maxWidth: 480 }}>{t('gi_cta_sub')}</p>
             </FadeIn>
             <FadeIn direction="left" delay={0.2}>
               <div style={{ display: 'flex', gap: 16, flexShrink: 0 }} className="flex-wrap">
-                <a href="#application-form" style={{ background: COLORS.ink, color: '#fff', fontWeight: 700, padding: '16px 32px', borderRadius: 8, textDecoration: 'none', fontSize: 15 }} className="transition-opacity hover:opacity-90">Apply Today</a>
-                <Link to="/donate" style={{ border: '2px solid #fff', color: '#fff', fontWeight: 700, padding: '16px 32px', borderRadius: 8, textDecoration: 'none', fontSize: 15 }} className="transition-opacity hover:opacity-90">Donate</Link>
+                <a href="#application-form" style={{ background: COLORS.ink, color: '#fff', fontWeight: 700, padding: '16px 32px', borderRadius: 8, textDecoration: 'none', fontSize: 15 }} className="transition-opacity hover:opacity-90">{t('gi_cta_apply')}</a>
+                <Link to="/donate" style={{ border: '2px solid #fff', color: '#fff', fontWeight: 700, padding: '16px 32px', borderRadius: 8, textDecoration: 'none', fontSize: 15 }} className="transition-opacity hover:opacity-90">{t('gi_cta_donate')}</Link>
               </div>
             </FadeIn>
           </div>
