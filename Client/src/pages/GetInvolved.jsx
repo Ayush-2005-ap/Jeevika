@@ -1,7 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { supabase } from '../lib/supabase';
 
 const COLORS = {
   saffron: '#E8760A', saffronLight: '#FFA830', saffronMist: '#FFF5E8',
@@ -61,6 +62,50 @@ const GetInvolved = () => {
   const [selectedRole, setSelectedRole] = useState(null);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', role: '', education: '', availability: '', motivation: '', resume: null });
   const [submitted, setSubmitted] = useState(false);
+  const [activeRoles, setActiveRoles] = useState([]); // Dynamic roles from Supabase
+
+  useEffect(() => {
+    const fetchRoles = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('application_roles')
+          .select('*')
+          .eq('is_active', true)
+          .order('display_order', { ascending: true });
+
+        if (error) {
+          console.warn("Supabase fetch error:", error.message);
+          return;
+        }
+
+        if (data && data.length > 0) {
+          // Merge Supabase data with hardcoded defaults
+          const merged = data.map(dbRole => {
+            const localDefault = opportunities.find(o => o.id === dbRole.role_id) || {};
+            return {
+              ...localDefault,
+              ...dbRole,
+              id: dbRole.role_id, // Ensure id matches for mapping
+              // Parse JSONB fields if they come as strings
+              responsibilities: typeof dbRole.responsibilities === 'string' ? JSON.parse(dbRole.responsibilities) : dbRole.responsibilities || localDefault.responsibilities,
+              requirements: typeof dbRole.requirements === 'string' ? JSON.parse(dbRole.requirements) : dbRole.requirements || localDefault.requirements,
+            };
+          });
+          setActiveRoles(merged);
+        } else {
+          // Fallback if table is empty
+          setActiveRoles(opportunities.filter(o => ['volunteer', 'intern'].includes(o.id)));
+        }
+      } catch (err) {
+        console.error("Failed to fetch roles:", err);
+      }
+    };
+
+    fetchRoles();
+  }, []);
+
+  // Use dynamic roles
+  const visibleOpportunities = activeRoles;
 
   const handleInputChange = (e) => { const { name, value } = e.target; setFormData(p => ({ ...p, [name]: value })); };
   const handleFileChange = (e) => setFormData(p => ({ ...p, resume: e.target.files[0] }));
@@ -108,9 +153,10 @@ const GetInvolved = () => {
             <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', fontWeight: 800, color: COLORS.ink, marginBottom: 16 }}>{t('gi_opp_heading')}</h2>
             <p style={{ color: COLORS.stone, fontSize: 16, maxWidth: 480, margin: '0 auto' }}>{t('gi_opp_sub')}</p>
           </FadeIn>
-          <div className="grid md:grid-cols-3 gap-6">
-            {opportunities.map((opp, i) => (
-              <FadeIn key={opp.id} delay={i * 0.12}>
+          <div className="flex flex-wrap justify-center gap-8">
+            {visibleOpportunities.map((opp, i) => (
+              <div key={opp.id} className="w-full md:w-[calc(33.333%-22px)] min-w-[300px] max-w-[380px]">
+                <FadeIn delay={i * 0.12}>
                 <motion.div whileHover={{ y: -6, boxShadow: '0 16px 48px rgba(26,18,8,0.13)' }} transition={{ duration: 0.3 }}
                   style={{ background: '#fff', borderRadius: 16, padding: '36px 28px', borderLeft: `5px solid ${COLORS.saffron}`, boxShadow: selectedRole === opp.id ? `0 0 0 3px ${COLORS.saffronLight}` : '0 2px 12px rgba(26,18,8,0.06)', cursor: 'pointer' }}
                   onClick={() => setSelectedRole(selectedRole === opp.id ? null : opp.id)}>
@@ -129,14 +175,15 @@ const GetInvolved = () => {
                   </motion.button>
                 </motion.div>
               </FadeIn>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
 
           {/* Role Detail Panel */}
           <AnimatePresence>
             {selectedRole && (
               <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.4 }} style={{ overflow: 'hidden', marginTop: 32 }}>
-                {opportunities.filter(o => o.id === selectedRole).map(opp => (
+                {visibleOpportunities.filter(o => o.id === selectedRole).map(opp => (
                   <div key={opp.id} style={{ background: '#fff', borderRadius: 16, padding: '40px 36px', border: `2px solid ${COLORS.stoneLight}` }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 28 }}>
                       <h3 style={{ fontFamily: 'Georgia, serif', fontSize: 24, fontWeight: 800, color: COLORS.ink, display: 'flex', alignItems: 'center', gap: 12 }}><span style={{ fontSize: 32 }}>{opp.icon}</span>{opp.title} — Details</h3>
@@ -245,9 +292,9 @@ const GetInvolved = () => {
                   <label style={{ display: 'block', fontWeight: 600, fontSize: 14, color: COLORS.inkMid, marginBottom: 8 }}>{t('gi_form_role')} <span style={{ color: COLORS.saffron }}>*</span></label>
                   <select name="role" value={formData.role} onChange={handleInputChange} required style={inputStyle}>
                     <option value="">{t('gi_form_role_placeholder')}</option>
-                    <option value="Volunteer">{t('gi_role_volunteer')}</option>
-                    <option value="Intern">{t('gi_role_intern')}</option>
-                    <option value="Jeevika Fellowship">{t('gi_role_fellow')}</option>
+                    {visibleOpportunities.map(opp => (
+                      <option key={opp.id} value={opp.title}>{opp.title}</option>
+                    ))}
                   </select>
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
@@ -316,7 +363,6 @@ const GetInvolved = () => {
             <FadeIn direction="left" delay={0.2}>
               <div style={{ display: 'flex', gap: 16, flexShrink: 0 }} className="flex-wrap">
                 <a href="#application-form" style={{ background: COLORS.ink, color: '#fff', fontWeight: 700, padding: '16px 32px', borderRadius: 8, textDecoration: 'none', fontSize: 15 }} className="transition-opacity hover:opacity-90">{t('gi_cta_apply')}</a>
-                <Link to="/donate" style={{ border: '2px solid #fff', color: '#fff', fontWeight: 700, padding: '16px 32px', borderRadius: 8, textDecoration: 'none', fontSize: 15 }} className="transition-opacity hover:opacity-90">{t('gi_cta_donate')}</Link>
               </div>
             </FadeIn>
           </div>

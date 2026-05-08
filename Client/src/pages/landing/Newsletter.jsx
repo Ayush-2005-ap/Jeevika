@@ -98,37 +98,7 @@ const Newsletter = () => {
             </motion.div>
           )}
 
-          {/* Divider */}
-          <div className="flex items-center gap-3 mb-10 max-w-xs mx-auto">
-            <div className="flex-1 h-px" style={{ background: COLORS.stoneLight }} />
-            <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: COLORS.stone }}>or</span>
-            <div className="flex-1 h-px" style={{ background: COLORS.stoneLight }} />
-          </div>
 
-          {/* Donate CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.4 }}
-          >
-            <p className="text-sm mb-5" style={{ color: COLORS.stone }}>
-              Make a direct contribution to protect vendor rights across India
-            </p>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }} className="inline-block">
-              <Link
-                to="/donate"
-                className="inline-flex items-center gap-3 px-10 py-4 rounded-full font-bold text-base transition-all"
-                style={{
-                  background: COLORS.ink,
-                  color: "#fff",
-                  boxShadow: "0 8px 32px rgba(26,18,8,0.25)",
-                }}
-              >
-                <Heart className="w-5 h-5" style={{ color: COLORS.saffron }} />
-                {t("newsletter_donate")}
-              </Link>
-            </motion.div>
-          </motion.div>
 
           {/* Trust badges */}
           <motion.div

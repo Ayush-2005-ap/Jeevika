@@ -9,7 +9,6 @@ import Festival from './pages/Festival';
 import GetInvolved from './pages/GetInvolved';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import Donate from './pages/Donate';
 import { LanguageProvider } from './context/LanguageContext';
 import ResearchDetail from './pages/ResearchDetail'
 import { useTranslation } from 'react-i18next';
@@ -40,7 +39,6 @@ function App() {
               <Route path="/fellowship" element={<GetInvolved />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/donate" element={<Donate />} />
             </Routes>
           </main>
           <Footer />

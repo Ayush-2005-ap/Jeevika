@@ -442,13 +442,6 @@ export default function About() {
             >
               {t('about_page_get_involved')}
             </Link>
-            <Link
-              to="/donate"
-              className="transition-opacity hover:opacity-90"
-              style={{ border: `2px solid ${COLORS.ink}`, color: COLORS.ink, fontWeight: 600, padding: '10px 24px', borderRadius: 6, fontSize: 14, textDecoration: 'none', display: 'inline-block' }}
-            >
-              {t('about_page_donate')}
-            </Link>
           </div>
         </div>
       </section>
@@ -724,9 +717,6 @@ export default function About() {
               <div style={{ display: 'flex', gap: 16, flexShrink: 0 }} className="flex-wrap">
                 <Link to="/get-involved" className="transition-opacity hover:opacity-90" style={{ background: COLORS.ink, color: '#fff', fontWeight: 700, padding: '16px 32px', borderRadius: 8, textDecoration: 'none', fontSize: 15 }}>
                   {t('about_cta_get_involved')}
-                </Link>
-                <Link to="/donate" className="transition-opacity hover:opacity-90" style={{ border: '2px solid #fff', color: '#fff', fontWeight: 700, padding: '16px 32px', borderRadius: 8, textDecoration: 'none', fontSize: 15 }}>
-                  {t('about_cta_donate')}
                 </Link>
               </div>
             </FadeIn>

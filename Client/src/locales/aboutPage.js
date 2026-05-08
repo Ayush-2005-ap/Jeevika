@@ -3,7 +3,7 @@ export const aboutPageEn = {
   about_page_title: "About Jeevika",
   about_page_tagline: "A technology-enabled platform for legal dignity — reaching street vendors across Delhi and Jaipur with awareness, legal aid, and community support.",
   about_page_get_involved: "Get Involved",
-  about_page_donate: "Donate",
+
   about_impact_label: "Impact",
   about_impact_heading: "Our Reach and Results",
   about_impact_intro: "Since its launch, Jeevika has reached over 12,000 users across 400+ markets in Delhi and Jaipur, achieving a 92 percent complaint resolution rate. More than 10,000 vendors have been trained on their legal rights through a combination of app engagement and legal aid camps.",
@@ -80,14 +80,14 @@ export const aboutPageEn = {
   about_cta_heading: "Support Livelihood Freedom",
   about_cta_desc: "Help us expand legal access, protect vendor rights, and scale the Jeevika App across more cities in India.",
   about_cta_get_involved: "Get Involved",
-  about_cta_donate: "Donate Now",
+
 };
 
 export const aboutPageHi = {
   about_page_title: "जीविका के बारे में",
   about_page_tagline: "कानूनी गरिमा के लिए एक प्रौद्योगिकी-सक्षम प्लेटफॉर्म — दिल्ली और जयपुर में स्ट्रीट वेंडरों तक जागरूकता, कानूनी सहायता और सामुदायिक समर्थन के साथ पहुंचना।",
   about_page_get_involved: "जुड़ें",
-  about_page_donate: "दान करें",
+
   about_impact_label: "प्रभाव",
   about_impact_heading: "हमारी पहुंच और परिणाम",
   about_impact_intro: "लॉन्च के बाद से, जीविका ने दिल्ली और जयपुर में 400+ बाजारों में 12,000 से अधिक उपयोगकर्ताओं तक पहुंच बनाई है, 92 प्रतिशत शिकायत समाधान दर हासिल की है। 10,000 से अधिक वेंडरों को ऐप इंगेजमेंट और कानूनी सहायता शिविरों के संयोजन के माध्यम से उनके कानूनी अधिकारों पर प्रशिक्षित किया गया है।",
@@ -164,7 +164,7 @@ export const aboutPageHi = {
   about_cta_heading: "आजीविका स्वतंत्रता का समर्थन करें",
   about_cta_desc: "कानूनी पहुंच का विस्तार करने, वेंडर अधिकारों की रक्षा करने और भारत के अधिक शहरों में जीविका ऐप को बढ़ाने में हमारी मदद करें।",
   about_cta_get_involved: "जुड़ें",
-  about_cta_donate: "अभी दान करें",
+
 };
 
 /* Bengali - uses shared structure; refine translations as needed */
@@ -172,7 +172,7 @@ export const aboutPageBn = {
   about_page_title: "জীবিকা সম্পর্কে",
   about_page_tagline: "আইনি মর্যাদার জন্য প্রযুক্তি-সক্ষম প্ল্যাটফর্ম — দিল্লি ও জয়পুর জুড়ে পথবিক্রেতাদের সচেতনতা, আইনি সহায়তা এবং কমিউনিটি সমর্থন পৌঁছে দিচ্ছে।",
   about_page_get_involved: "অংশগ্রহণ করুন",
-  about_page_donate: "দান করুন",
+
   about_impact_label: "প্রভাব",
   about_impact_heading: "আমাদের পৌঁছানো ও ফলাফল",
   about_impact_intro: "প্রবর্তনের পর থেকে জীবিকা দিল্লি ও জয়পুরের ৪০০+ বাজারে ১২,০০০-এর বেশি ব্যবহারকারীর কাছে পৌঁছেছে, এবং ৯২ শতাংশ অভিযোগ নিষ্পত্তির হার অর্জন করেছে। ১০,০০০-এরও বেশি বিক্রেতাকে অ্যাপ ও আইনি সহায়তা শিবিরের মাধ্যমে তাদের আইনি অধিকার সম্পর্কে প্রশিক্ষণ দেওয়া হয়েছে।",
@@ -249,7 +249,7 @@ export const aboutPageBn = {
   about_cta_heading: "জীবিকা স্বাধীনতাকে সমর্থন করুন",
   about_cta_desc: "আইনি সহায়তা সম্প্রসারণ, বিক্রেতাদের অধিকার সুরক্ষা এবং জীবিকা অ্যাপকে আরও শহরে পৌঁছে দিতে আমাদের সহায়তা করুন।",
   about_cta_get_involved: "অংশগ্রহণ করুন",
-  about_cta_donate: "এখনই দান করুন",
+
 };
 
 /* Tamil - uses shared structure; refine translations as needed */
@@ -257,7 +257,7 @@ export const aboutPageTa = {
   about_page_title: "ஜீவிகா பற்றி",
   about_page_tagline: "சட்ட மரியாதைக்கான தொழில்நுட்ப தளம் — டெல்லி மற்றும் ஜெய்ப்பூர் முழுவதும் தெரு விற்பனையாளர்களுக்கு விழிப்புணர்வு, சட்ட உதவி மற்றும் சமூக ஆதரவு வழங்குகிறது.",
   about_page_get_involved: "இணைந்துகொள்ளுங்கள்",
-  about_page_donate: "நன்கொடை அளிக்கவும்",
+
   about_impact_label: "பாதிப்பு",
   about_impact_heading: "எங்கள் சென்றடைவு மற்றும் விளைவுகள்",
   about_impact_intro: "தொடங்கியதிலிருந்து ஜீவிகா டெல்லி மற்றும் ஜெய்ப்பூரில் 400+ சந்தைகளில் 12,000-க்கும் மேற்பட்ட பயனர்களை சென்றடைந்து, 92 சதவீத புகார் தீர்வு விகிதத்தை பெற்றுள்ளது. 10,000-க்கும் மேற்பட்ட விற்பனையாளர்கள் சட்ட உரிமைகள் குறித்து ஆப் பயன்பாடு மற்றும் சட்ட உதவி முகாம்கள் மூலம் பயிற்சி பெற்றுள்ளனர்.",
@@ -334,7 +334,7 @@ export const aboutPageTa = {
   about_cta_heading: "வாழ்வாதார சுதந்திரத்திற்கு ஆதரவு அளிக்கவும்",
   about_cta_desc: "சட்ட அணுகலை விரிவுபடுத்த, விற்பனையாளர் உரிமைகளை பாதுகாக்க மற்றும் ஜீவிகா பயன்பாட்டை மேலும் நகரங்களுக்கு விரிவாக்க உதவுங்கள்.",
   about_cta_get_involved: "இணைந்துகொள்ளுங்கள்",
-  about_cta_donate: "இப்போது நன்கொடை அளிக்கவும்",
+
 };
 
 /* Telugu - uses shared structure; refine translations as needed */
@@ -342,7 +342,7 @@ export const aboutPageTe = {
   about_page_title: "జీవికా గురించి",
   about_page_tagline: "చట్ట గౌరవం కోసం సాంకేతిక వేదిక — ఢిల్లీ మరియు జైపూర్ అంతటా వీధి వ్యాపారులకు అవగాహన, న్యాయ సహాయం మరియు సముదాయ మద్దతు అందిస్తోంది.",
   about_page_get_involved: "భాగస్వామ్యం అవ్వండి",
-  about_page_donate: "దానం చేయండి",
+
   about_impact_label: "ప్రభావం",
   about_impact_heading: "మా చేరిక మరియు ఫలితాలు",
   about_impact_intro: "ప్రారంభం నుండి జీవికా ఢిల్లీ మరియు జైపూర్ లోని 400+ మార్కెట్లలో 12,000 కంటే ఎక్కువ వినియోగదారులను చేరుకుంది మరియు 92 శాతం ఫిర్యాదు పరిష్కార రేటును సాధించింది. 10,000 కంటే ఎక్కువ వ్యాపారులకు వారి చట్టపరమైన హక్కులపై యాప్ మరియు న్యాయ సహాయ శిబిరాల ద్వారా శిక్షణ ఇవ్వబడింది.",
@@ -419,5 +419,5 @@ export const aboutPageTe = {
   about_cta_heading: "ఉపాధి స్వేచ్ఛకు మద్దతు ఇవ్వండి",
   about_cta_desc: "న్యాయ సహాయాన్ని విస్తరించడానికి, వ్యాపారుల హక్కులను రక్షించడానికి మరియు జీవికా యాప్‌ను మరిన్ని నగరాలకు విస్తరించడానికి మాకు మద్దతు ఇవ్వండి.",
   about_cta_get_involved: "భాగస్వామ్యం అవ్వండి",
-  about_cta_donate: "ఇప్పుడే దానం చేయండి",
+
 };

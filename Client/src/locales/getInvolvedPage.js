@@ -43,7 +43,7 @@ export const getInvolvedPageEn = {
     gi_cta_heading: "Ready to Make a Difference?",
     gi_cta_sub: "Join us in our mission to empower street vendors and create lasting social change.",
     gi_cta_apply: "Apply Today",
-    gi_cta_donate: "Donate",
+
     gi_role_volunteer: "Volunteer",
     gi_role_intern: "Intern",
     gi_role_fellow: "Jeevika Fellowship (Law Students)",
@@ -98,7 +98,7 @@ export const getInvolvedPageHi = {
     gi_cta_heading: "बदलाव लाने के लिए तैयार हैं?",
     gi_cta_sub: "स्ट्रीट वेंडरों को सशक्त बनाने और स्थायी सामाजिक परिवर्तन लाने के हमारे मिशन में शामिल हों।",
     gi_cta_apply: "आज ही आवेदन करें",
-    gi_cta_donate: "दान करें",
+
     gi_role_volunteer: "स्वयंसेवक",
     gi_role_intern: "इंटर्न",
     gi_role_fellow: "जीविका फेलोशिप (कानून के छात्र)",
@@ -153,7 +153,7 @@ export const getInvolvedPageBn = {
     gi_cta_heading: "পরিবর্তন আনতে প্রস্তুত?",
     gi_cta_sub: "পথবিক্রেতাদের ক্ষমতায়ন এবং স্থায়ী সামাজিক পরিবর্তন আনতে আমাদের সাথে যোগ দিন।",
     gi_cta_apply: "আজই আবেদন করুন",
-    gi_cta_donate: "দান করুন",
+
     gi_role_volunteer: "স্বেচ্ছাসেবী",
     gi_role_intern: "ইন্টার্ন",
     gi_role_fellow: "জীবিকা ফেলোশিপ (আইন শিক্ষার্থী)",
@@ -208,7 +208,7 @@ export const getInvolvedPageTa = {
     gi_cta_heading: "மாற்றம் கொண்டு வர தயாரா?",
     gi_cta_sub: "தெரு விற்பனையாளர்களை மேம்படுத்தவும் நீடித்த சமூக மாற்றத்தை உருவாக்கவும் எங்களுடன் இணைந்துகொள்ளுங்கள்.",
     gi_cta_apply: "இன்றே விண்ணப்பிக்கவும்",
-    gi_cta_donate: "நன்கொடை அளிக்கவும்",
+
     gi_role_volunteer: "தன்னார்வலர்",
     gi_role_intern: "இன்டர்ன்",
     gi_role_fellow: "ஜீவிகா ஃபெல்லோஷிப் (சட்ட மாணவர்கள்)",
@@ -263,7 +263,7 @@ export const getInvolvedPageTe = {
     gi_cta_heading: "మార్పు తీసుకొచ్చేందుకు సిద్ధంగా ఉన్నారా?",
     gi_cta_sub: "వీధి వ్యాపారులను శక్తివంతం చేయడానికి మరియు శాశ్వత సామాజిక మార్పు తీసుకురావడానికి మాతో చేరండి.",
     gi_cta_apply: "ఈరోజే దరఖాస్తు చేయండి",
-    gi_cta_donate: "దానం చేయండి",
+
     gi_role_volunteer: "స్వయంసేవకుడు",
     gi_role_intern: "ఇంటర్న్",
     gi_role_fellow: "జీవికా ఫెలోషిప్ (న్యాయ విద్యార్థులు)",

@@ -89,7 +89,7 @@ i18n
           newsletter_placeholder: "Enter your email",
           newsletter_subscribe: "Subscribe",
           newsletter_success: "✅ Thanks for subscribing!",
-          newsletter_donate: "Donate for Change",
+
 
           footer_tagline: "Law, Liberty & Livelihood",
           footer_desc:
@@ -196,7 +196,7 @@ i18n
           newsletter_placeholder: "अपना ईमेल दर्ज करें",
           newsletter_subscribe: "सब्सक्राइब करें",
           newsletter_success: "✅ सब्सक्राइब करने के लिए धन्यवाद!",
-          newsletter_donate: "परिवर्तन के लिए दान करें",
+
 
 
 
@@ -297,7 +297,7 @@ i18n
           newsletter_placeholder: "আপনার ইমেইল লিখুন",
           newsletter_subscribe: "সাবস্ক্রাইব করুন",
           newsletter_success: "✅ সাবস্ক্রাইব করার জন্য ধন্যবাদ!",
-          newsletter_donate: "পরিবর্তনের জন্য দান করুন",
+
 
 
           footer_tagline: "আইন, স্বাধীনতা ও জীবিকা",
@@ -401,7 +401,7 @@ i18n
           newsletter_placeholder: "உங்கள் மின்னஞ்சலை உள்ளிடவும்",
           newsletter_subscribe: "சந்தா செலுத்தவும்",
           newsletter_success: "✅ சந்தா செய்ததற்கு நன்றி!",
-          newsletter_donate: "மாற்றத்திற்காக நன்கொடை வழங்கவும்",
+
 
           footer_tagline: "சட்டம், சுதந்திரம் மற்றும் வாழ்வாதாரம்",
           footer_desc:
@@ -504,7 +504,7 @@ i18n
           newsletter_placeholder: "మీ ఇమెయిల్ నమోదు చేయండి",
           newsletter_subscribe: "సబ్స్క్రైబ్ చేయండి",
           newsletter_success: "✅ సబ్స్క్రైబ్ చేసినందుకు ధన్యవాదాలు!",
-          newsletter_donate: "మార్పు కోసం విరాళం ఇవ్వండి",
+
 
 
           footer_tagline: "చట్టం, స్వేచ్ఛ మరియు జీవిక",

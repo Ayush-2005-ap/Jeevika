@@ -235,9 +235,10 @@ const Navbar = () => {
             {/* App button */}
             <button
               type="button"
-              className="ml-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary-500 to-primary-700 text-white text-sm font-semibold hover:scale-105 transition-transform"
+              className="ml-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary-500 to-primary-700 text-white text-sm font-semibold hover:scale-105 transition-transform flex items-center gap-2"
             >
-              📱 {t("nav_app")}
+              <img src="/favicon_io (2)/favicon-32x32.png" alt="App Icon" className="w-5 h-5 rounded-md shadow-sm" />
+              {t("nav_app")}
             </button>
 
             {/* ── Language Switcher ── */}
@@ -411,9 +412,10 @@ const Navbar = () => {
                 {/* App button */}
                 <button
                   type="button"
-                  className="px-4 py-2 rounded-full bg-gradient-to-r from-primary-500 to-primary-700 text-white text-sm font-semibold"
+                  className="px-4 py-2 rounded-full bg-gradient-to-r from-primary-500 to-primary-700 text-white text-sm font-semibold flex items-center gap-2 w-fit"
                 >
-                  📱 {t("nav_app")}
+                  <img src="/favicon_io (2)/favicon-32x32.png" alt="App Icon" className="w-5 h-5 rounded-md shadow-sm" />
+                  {t("nav_app")}
                 </button>
 
                 {/* Language switcher mobile */}

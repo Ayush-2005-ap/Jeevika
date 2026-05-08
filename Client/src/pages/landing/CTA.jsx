@@ -150,19 +150,7 @@ const CTA = () => {
           })}
         </div>
 
-        {/* Bottom donate nudge */}
-        <motion.div
-          initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.8 }}
-          className="text-center mt-16"
-        >
-          <p className="text-sm mb-4" style={{ color: COLORS.stoneLight }}>Every contribution, big or small, makes a difference.</p>
-          <Link to="/donate"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm transition-all hover:scale-105"
-            style={{ background: "rgba(232,118,10,0.18)", color: COLORS.saffronLight, border: "1.5px solid rgba(232,118,10,0.4)" }}>
-            ❤️ Donate to Jeevika
-          </Link>
-        </motion.div>
+
 
       </div>
     </section>
